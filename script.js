@@ -83,3 +83,27 @@ const observer = new IntersectionObserver(
 animateElements.forEach((element) => {
   observer.observe(element);
 });
+
+// for nevbar active
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").substring(1) === entry.target.id) {
+              link.classList.add("active");
+            }
+          });
+        }
+      });
+    },
+    { threshold: 0.3 }
+  ); // was 0.6, now 0.3
+
+  sections.forEach((section) => observer.observe(section));
+});
