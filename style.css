@@ -43,6 +43,41 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Project category cards (Web / AI) */
+.project-category-card {
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.2)
+  );
+}
+
+.project-category-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px);
+}
+
+.project-category-card i {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-category-card .card-image img {
+  transition: transform 0.4s ease;
+}
+
+.project-category-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.project-category-card .text-xs {
+  font-size: 0.625rem;
+}
+
 .skill-icon {
   transition: transform 0.3s ease;
 }

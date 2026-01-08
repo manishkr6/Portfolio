@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI / ML & Data Science Projects — Manish Kumar Baitha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm md:px-16">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold gradient-text">Manish.</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="index.html#about" class="nav-link">About</a>
+                    <a href="index.html#skills" class="nav-link">Skills</a>
+                    <a href="index.html#projects" class="nav-link">Projects</a>
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </nav>
+                <button class="md:hidden focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <div class="md:hidden hidden mt-4" id="mobile-menu">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html#home" class="nav-link py-2">Home</a>
+                    <a href="index.html#about" class="nav-link py-2">About</a>
+                    <a href="index.html#skills" class="nav-link py-2">Skills</a>
+                    <a href="index.html#projects" class="nav-link py-2">Projects</a>
+                    <a href="index.html#contact" class="nav-link py-2">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24">
+        <section class="py-20 md:px-16">
+            <div class="container mx-auto px-6">
+                <div class="flex items-center justify-between mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold">AI / ML & Data Science Projects</h1>
+                    <a href="index.html" class="px-4 py-2 border border-gray-600 rounded-lg">← Back to Home</a>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Heart Health Predictor -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden project-card flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img src="/asset/Heart.jpg" alt="Heart Health Predictor" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <h3 class="text-xl font-bold mb-2">Heart Health Predictor</h3>
+                            <p class="text-gray-300 mb-4">An AI-powered health analysis tool that predicts potential
+                                heart
+                                disease risk using user-provided health metrics.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">Python</span>
+                                <span
+                                    class="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Scikit-learn</span>
+                                <span class="text-xs bg-green-900/50 text-green-300 px-2 py-1 rounded">Streamlit</span>
+                                <span class="text-xs bg-yellow-900/50 text-yellow-300 px-2 py-1 rounded">Pandas</span>
+                            </div>
+                            <div class="mt-auto flex space-x-3">
+                                <a href="https://heart-health-predictor.streamlit.app/" target="_blank"
+                                    class="text-sm bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">Live Demo</a>
+                                <a href="https://github.com/manishkr6/heart-health-predictor" target="_blank"
+                                    class="text-sm border border-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg">Code</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie Recommendation System -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden project-card flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img src="./asset/movie-recommendation.png" alt="Movie Recommendation System"
+                                class="w-full h-full object-cover">
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-1">
+                            <h3 class="text-xl font-bold mb-2">Movie Recommendation System</h3>
+
+                            <p class="text-gray-300 mb-4">A machine-learning powered content-based movie recommender
+                                built using Python and Streamlit.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Python</span>
+                                <span class="text-xs bg-teal-900/50 text-teal-300 px-2 py-1 rounded">Streamlit</span>
+                                <span class="text-xs bg-pink-900/50 text-pink-300 px-2 py-1 rounded">Machine
+                                    Learning</span>
+                                <span class="text-xs bg-orange-900/50 text-orange-300 px-2 py-1 rounded">Pandas</span>
+                            </div>
+
+                            <div class="mt-auto flex space-x-3">
+                                <a href="https://manishkr6-movie-recommendation-system-app-xzcclt.streamlit.app/"
+                                    target="_blank"
+                                    class="text-sm bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">Live Demo</a>
+                                <a href="https://github.com/manishkr6/movie-recommendation-system" target="_blank"
+                                    class="text-sm border border-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg">Code</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="https://github.com/manishkr6" target="_blank"
+                        class="inline-flex items-center px-6 py-3 border border-gray-600 rounded-lg font-medium hover:bg-gray-800 transition">
+                        <i class="fab fa-github mr-2"></i>
+                        View All Projects on GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>

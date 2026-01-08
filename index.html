@@ -89,14 +89,17 @@
                     </div>
                 </div>
                 <div class="md:w-2/3 animate-fade-in delay-200">
-                    <p class="text-lg mb-6 text-justify">Hi, I’m Manish Kumar Baitha — an aspiring AI & Machine Learning Engineer,
+                    <p class="text-lg mb-6 text-justify">Hi, I’m Manish Kumar Baitha — an aspiring AI & Machine Learning
+                        Engineer,
                         Data Science enthusiast, and passionate Frontend Web Developer. I enjoy turning ideas into
                         intelligent, data-driven solutions and clean, user-friendly web applications.</p>
-                    <p class="text-lg mb-6 text-justify">My skillset includes Python, Pandas, NumPy, Matplotlib, Scikit-learn,
+                    <p class="text-lg mb-6 text-justify">My skillset includes Python, Pandas, NumPy, Matplotlib,
+                        Scikit-learn,
                         TensorFlow, and SQL for AI, ML, and analytics, along with HTML, CSS, JavaScript, React, Node.js,
                         Express.js, and MongoDB for web development. I love building predictive models, analyzing data,
                         visualizing insights, and creating responsive, interactive web tools.</p>
-                    <p class="text-lg mb-6 text-justify">Outside of coding, you’ll find me hiking in the hills, enjoying coffee while
+                    <p class="text-lg mb-6 text-justify">Outside of coding, you’ll find me hiking in the hills, enjoying
+                        coffee while
                         planning new ideas, or playing badminton. I believe in continuous learning and pushing
                         boundaries to build meaningful, impactful projects.</p>
                     <div class="flex flex-wrap gap-4">
@@ -260,123 +263,51 @@
             <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center animate-fade-in"><span
                     class="gradient-text">Featured Projects</span></h2>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project: Hearth Health -->
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden project-card animate-fade-in delay-100 flex flex-col">
-                    <div class="h-48 overflow-hidden">
-                        <img src="/asset/Heart.jpg" alt="Heart Health Predictor" class="w-full h-full object-cover">
+            <!-- Project Categories -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8 animate-fade-in">
+                <a href="projects-web.html"
+                    class="project-category-card block rounded-xl overflow-hidden p-6 bg-gray-800 hover:scale-[1.02] transition transform flex flex-col justify-between min-h-[280px]"
+                    aria-label="View Web Development projects">
+                    <div class="card-image h-40 md:h-60 w-full overflow-hidden rounded-md mb-4">
+                        <img src="./asset/web_development.jpg"
+                            alt="Web Development" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-2">Heart Health Predictor</h3>
-                        <p class="text-gray-300 mb-4">An AI-powered health analysis tool that predicts potential heart
-                            disease risk using user-provided health metrics. It processes the data, applies multiple ML
-                            models, and delivers an accurate risk prediction.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
+
+                    <div>
+                        <h3 class="text-xl font-bold">Web Development Projects</h3>
+                        <p class="text-gray-300 mt-2">Crafting responsive, accessible websites and interactive
+                            single-page applications using modern web technologies and best UX practices.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-green-900/50 text-green-300 px-2 py-1 rounded">Tailwind</span>
+                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-2 py-1 rounded">Node.js</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects-ai.html"
+                    class="project-category-card block rounded-xl overflow-hidden p-6 bg-gray-800 hover:scale-[1.02] transition transform flex flex-col justify-between min-h-[280px]"
+                    aria-label="View AI and Data Science projects">
+                    <div class="card-image h-40 md:h-60 w-full overflow-hidden rounded-md mb-4">
+                        <img src="./asset/AI.jpeg"
+                            alt="AI and Data Science" class="w-full h-full object-cover">
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold">AI / ML & Data Science Projects</h3>
+                        <p class="text-gray-300 mt-2">Designing predictive models, recommendation systems, and visual
+                            analytics that transform raw data into clear, actionable insights.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
                             <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">Python</span>
                             <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Scikit-learn</span>
-                            <span class="text-xs bg-green-900/50 text-green-300 px-2 py-1 rounded">Streamlit</span>
-                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-2 py-1 rounded">Pandas</span>
-                        </div>
-                        <div class="mt-auto flex space-x-3">
-                            <a href="https://heart-health-predictor.streamlit.app/" target="_blank"
-                                class="text-sm bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">Live Demo</a>
-                            <a href="https://github.com/manishkr6/heart-health-predictor" target="_blank"
-                                class="text-sm border border-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg">Code</a>
+                            <span class="text-xs bg-green-900/50 text-green-300 px-2 py-1 rounded">Pandas</span>
                         </div>
                     </div>
-                </div>
+                </a>
+            </div>
 
-                <!-- Project: IT Asset Request Management -->
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden project-card animate-fade-in delay-200 flex flex-col">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
-                            alt="IT Asset Request Management System" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-2">IT Asset Request Management</h3>
-                        <p class="text-gray-300 mb-4">A multi-role workflow management application that streamlines IT
-                            asset requests, approvals, and tracking within organizations.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">React</span>
-                            <span class="text-xs bg-green-900/50 text-green-300 px-2 py-1 rounded">Node.js</span>
-                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-2 py-1 rounded">MongoDB</span>
-                            <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Tailwind CSS</span>
-                            <span class="text-xs bg-rose-900/50 text-rose-300 px-2 py-1 rounded">Express.js</span>
-                        </div>
-                        <div class="mt-auto flex space-x-3">
-                            <a href="#" target="_blank"
-                                class="text-sm bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">Live Demo</a>
-                            <a href="https://github.com/manishkr6/govt-it-asset-management" target="_blank"
-                                class="text-sm border border-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project: Movie Recommendation System -->
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden project-card animate-fade-in delay-400 flex flex-col">
-                    <div class="h-48 overflow-hidden">
-                        <img src="./asset/movie-recommendation.png" alt="Movie Recommendation System"
-                            class="w-full h-full object-cover">
-                    </div>
-
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-2">Movie Recommendation System</h3>
-
-                        <p class="text-gray-300 mb-4">
-                            A machine-learning powered content-based movie recommender built using Python and Streamlit.
-                            It recommends top-5 similar movies based on cosine similarity and displays posters using the
-                            TMDB API.
-                        </p>
-
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Python</span>
-                            <span class="text-xs bg-teal-900/50 text-teal-300 px-2 py-1 rounded">Streamlit</span>
-                            <span class="text-xs bg-pink-900/50 text-pink-300 px-2 py-1 rounded">Machine Learning</span>
-                            <span class="text-xs bg-orange-900/50 text-orange-300 px-2 py-1 rounded">Pandas</span>
-                            <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">Scikit-Learn</span>
-                        </div>
-
-                        <div class="mt-auto flex space-x-3">
-                            <a href="https://manishkr6-movie-recommendation-system-app-xzcclt.streamlit.app/"
-                                target="_blank" class="text-sm bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">Live
-                                Demo</a>
-
-                            <a href="https://github.com/manishkr6/movie-recommendation-system" target="_blank"
-                                class="text-sm border border-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project: Hotel Booking -->
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden project-card animate-fade-in delay-400 flex flex-col">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1630&q=80"
-                            alt="Hotel Booking System" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-2">Hotel Booking</h3>
-                        <p class="text-gray-300 mb-4">
-                            A hotel room booking platform with dedicated user and admin interfaces.
-                            Users can search, book, and manage reservations, while admins manage rooms
-                            and monitor bookings through a secure, role-based admin panel.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">React.js</span>
-                            <span class="text-xs bg-teal-900/50 text-teal-300 px-2 py-1 rounded">React Router</span>
-                            <span class="text-xs bg-pink-900/50 text-pink-300 px-2 py-1 rounded">Tailwind CSS</span>
-                        </div>
-                        <div class="mt-auto flex space-x-3">
-                            <a href="https://hotel-booking-frontend-gules.vercel.app/" target="_blank"
-                                class="text-sm bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">Live Demo</a>
-                            <a href="https://github.com/manishkr6/Hotel-Booking-Frontend" target="_blank"
-                                class="text-sm border border-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg">Code</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center mt-8 animate-fade-in delay-200">
+                <p class="text-gray-400">Choose a category above to view related projects.</p>
             </div>
 
 
