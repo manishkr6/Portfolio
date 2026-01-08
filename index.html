@@ -19,6 +19,7 @@
                     <a href="#home" class="nav-link">Home</a>
                     <a href="#about" class="nav-link">About</a>
                     <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#certificates" class="nav-link">Certificate</a>
                     <a href="#projects" class="nav-link">Projects</a>
                     <a href="#contact" class="nav-link">Contact</a>
                 </nav>
@@ -257,6 +258,61 @@
         </div>
     </section>
 
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 md:px-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center animate-fade-in"><span
+                    class="gradient-text">Certificates</span></h2>
+
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-fade-in delay-100 certificate-grid">
+                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
+                    data-full="/asset/certificates/Govt_internship.jpg">
+                    <img src="/asset/certificates/Govt_internship.jpg" alt="Certificate 1"
+                        class="w-full h-56 object-cover rounded-md">
+                    <h3 class="text-lg font-semibold mt-4">
+                        Internship – Government of Sikkim (IT Department)
+                    </h3>
+                    <p class="text-gray-300 text-sm mt-2">
+                        Hands-on MERN Stack development experience working on real-world government IT projects.
+                    </p>
+                </div>
+
+                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
+                    data-full="/asset/certificates/Tata_gen_ai.png">
+                    <img src="/asset/certificates/Tata_gen_ai.png" alt="Certificate 2"
+                        class="w-full h-56 object-cover rounded-md">
+                    <h3 class="text-lg font-semibold mt-4">
+                        TATA – GenAI Powered Data Analytics (Forage)
+                    </h3>
+                    <p class="text-gray-300 text-sm mt-2">
+                        Virtual job simulation focused on GenAI-powered data analytics, insights, and business problem
+                        solving.
+                    </p>
+                </div>
+
+                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
+                    data-full="/asset/certificates/Deloitte_Data_Analytics.png">
+                    <img src="/asset/certificates/Deloitte_Data_Analytics.png" alt="Certificate 4"
+                        class="w-full h-56 object-cover rounded-md">
+                    <h3 class="text-lg font-semibold mt-4">
+                        Deloitte Virtual Experience Program – Data Analytics
+                    </h3>
+                    <p class="text-gray-300 text-sm mt-2">
+                        Completed Deloitte’s data analytics job simulation involving data interpretation and business
+                        reporting.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 animate-fade-in delay-200">
+                <a href="certificates.html"
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition">View
+                    More Certificates</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="py-20 bg-gray-900 md:px-16">
         <div class="container mx-auto px-6">
@@ -269,8 +325,7 @@
                     class="project-category-card block rounded-xl overflow-hidden p-6 bg-gray-800 hover:scale-[1.02] transition transform flex flex-col justify-between min-h-[280px]"
                     aria-label="View Web Development projects">
                     <div class="card-image h-40 md:h-60 w-full overflow-hidden rounded-md mb-4">
-                        <img src="./asset/web_development.jpg"
-                            alt="Web Development" class="w-full h-full object-cover">
+                        <img src="./asset/web_development.jpg" alt="Web Development" class="w-full h-full object-cover">
                     </div>
 
                     <div>
@@ -289,8 +344,7 @@
                     class="project-category-card block rounded-xl overflow-hidden p-6 bg-gray-800 hover:scale-[1.02] transition transform flex flex-col justify-between min-h-[280px]"
                     aria-label="View AI and Data Science projects">
                     <div class="card-image h-40 md:h-60 w-full overflow-hidden rounded-md mb-4">
-                        <img src="./asset/AI.jpeg"
-                            alt="AI and Data Science" class="w-full h-full object-cover">
+                        <img src="./asset/AI.jpeg" alt="AI and Data Science" class="w-full h-full object-cover">
                     </div>
 
                     <div>
@@ -431,6 +485,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="hidden">
+        <button id="modal-close" aria-label="Close modal">&times;</button>
+        <img id="modal-img" src="" alt="Full Certificate" />
+    </div>
 
     <script src="/script.js"></script>
     </body>
