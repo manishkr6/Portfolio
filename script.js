@@ -107,3 +107,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sections.forEach((section) => observer.observe(section));
 });
+
+// Certificates modal behavior
+document.addEventListener("DOMContentLoaded", () => {
+  const certificateCards = document.querySelectorAll(".certificate-card");
+  const imageModal = document.getElementById("image-modal");
+  const modalImg = document.getElementById("modal-img");
+  const modalClose = document.getElementById("modal-close");
+
+  if (!imageModal) return;
+
+  certificateCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const full =
+        card.getAttribute("data-full") || card.querySelector("img")?.src;
+      if (!full) return;
+      modalImg.src = full;
+      imageModal.classList.add("active");
+      imageModal.classList.remove("hidden");
+    });
+  });
+
+  modalClose &&
+    modalClose.addEventListener("click", () => {
+      imageModal.classList.remove("active");
+      imageModal.classList.add("hidden");
+      modalImg.src = "";
+    });
+
+  imageModal.addEventListener("click", (e) => {
+    if (e.target === imageModal) {
+      imageModal.classList.remove("active");
+      imageModal.classList.add("hidden");
+      modalImg.src = "";
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && imageModal.classList.contains("active")) {
+      imageModal.classList.remove("active");
+      imageModal.classList.add("hidden");
+      modalImg.src = "";
+    }
+  });
+});
