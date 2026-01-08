@@ -117,3 +117,66 @@ body {
 .delay-400 {
   animation-delay: 0.4s;
 }
+
+/* Certificates */
+.certificate-grid .certificate-card {
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.certificate-grid .certificate-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.certificate-img {
+  transition: transform 0.35s ease;
+}
+
+.certificate-card:hover .certificate-img {
+  transform: scale(1.03);
+}
+
+/* Modal */
+#image-modal {
+  display: none; /* shown via inline-flex when active */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+#image-modal.active {
+  display: -webkit-inline-box; /* fallbacks */
+  display: inline-flex;
+}
+
+#image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+#modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .certificate-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .certificate-img {
+    height: 160px !important;
+    object-fit: cover;
+  }
+}
