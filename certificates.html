@@ -2,157 +2,189 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificates - Manish Kumar Baitha</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>Certificates | Manish Kumar Baitha</title>
+    <meta name="description"
+        content="Certificates of Manish Kumar Baitha including Government Internship, OJT, Web Development, AI & ML, and Competitions." />
+    <meta name="keywords"
+        content="Manish Kumar Baitha, Certificates, Internship, OJT, Web Development, AI ML" />
+    <meta name="author" content="Manish Kumar Baitha" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-gray-900 text-gray-100">
-    <header class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm md:px-16">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold gradient-text">Manish.</a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="index.html#home" class="nav-link">Home</a>
-                    <a href="index.html#about" class="nav-link">About</a>
-                    <a href="index.html#skills" class="nav-link">Skills</a>
-                    <a href="index.html#certificates" class="nav-link">Certificates</a>
-                    <a href="index.html#projects" class="nav-link">Projects</a>
-                    <a href="index.html#contact" class="nav-link">Contact</a>
-                </nav>
-                <button class="md:hidden focus:outline-none" id="menu-toggle">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
 
-            <!-- Mobile Menu -->
-            <div class="md:hidden hidden mt-4" id="mobile-menu">
-                <div class="flex flex-col space-y-3">
-                    <a href="index.html#home" class="nav-link py-2">Home</a>
-                    <a href="index.html#about" class="nav-link py-2">About</a>
-                    <a href="index.html#skills" class="nav-link py-2">Skills</a>
-                    <a href="index.html#projects" class="nav-link py-2">Projects</a>
-                    <a href="index.html#contact" class="nav-link py-2">Contact</a>
-                </div>
-            </div>
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <a href="index.html" class="text-2xl font-bold gradient-text">Manish.</a>
         </div>
     </header>
 
-    <main class="py-12">
-        <div class="container mx-auto px-6 mt-12">
-            <h1 class="text-3xl font-bold mb-8 text-center gradient-text">All Certificates</h1>
+    <main class="pt-24 pb-12 max-w-7xl mx-auto px-4">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
-                    data-full="/asset/certificates/Govt_internship.jpg">
-                    <img src="/asset/certificates/Govt_internship.jpg" alt="Certificate 1"
-                        class="w-full h-56 object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-4">
-                        Internship – Government of Sikkim (IT Department)
-                    </h3>
-                    <p class="text-gray-300 text-sm mt-2">
-                        Hands-on MERN Stack development experience working on real-world government IT projects.
-                    </p>
-                </div>
+        <h1 class="text-3xl md:text-4xl font-bold text-center gradient-text mb-8">
+            My Certificates
+        </h1>
 
-                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
-                    data-full="/asset/certificates/Tata_gen_ai.png">
-                    <img src="/asset/certificates/Tata_gen_ai.png" alt="Certificate 2"
-                        class="w-full h-56 object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-4">
-                        TATA – GenAI Powered Data Analytics (Forage)
-                    </h3>
-                    <p class="text-gray-300 text-sm mt-2">
-                        Virtual job simulation focused on GenAI-powered data analytics, insights, and business problem
-                        solving.
-                    </p>
-                </div>
+        <!-- Search -->
+        <div class="max-w-md mx-auto mb-6">
+            <input type="text" id="searchInput" placeholder="Search certificates..."
+                class="w-full px-4 py-3 rounded-xl bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
 
-                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
-                    data-full="/asset/certificates/AI-Ml_Udemy.png">
-                    <img src="/asset/certificates/AI-Ml_Udemy.png" alt="Certificate 3"
-                        class="w-full h-56 object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-4">
-                        Complete A.I. & Machine Learning, Data Science Bootcamp – Udemy
-                    </h3>
-                    <p class="text-gray-300 text-sm mt-2">
-                        Comprehensive training in AI, machine learning, and data science concepts with practical
-                        projects.
-                    </p>
-                </div>
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="internship">Internship</button>
+            <button class="filter-btn" data-filter="web">Web Dev</button>
+            <button class="filter-btn" data-filter="ai">AI / ML</button>
+            <button class="filter-btn" data-filter="competition">Competition</button>
+        </div>
 
-                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
-                    data-full="/asset/certificates/Deloitte_Data_Analytics.png">
-                    <img src="/asset/certificates/Deloitte_Data_Analytics.png" alt="Certificate 4"
-                        class="w-full h-56 object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-4">
-                        Deloitte Virtual Experience Program – Data Analytics
-                    </h3>
-                    <p class="text-gray-300 text-sm mt-2">
-                        Completed Deloitte’s data analytics job simulation involving data interpretation and business
-                        reporting.
-                    </p>
-                </div>
+        <!-- Skeleton -->
+        <div id="skeleton" class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+        </div>
 
-                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
-                    data-full="/asset/certificates/cert5-full.svg">
-                    <img src="/asset/certificates/cert5.svg" alt="Certificate 5"
-                        class="w-full h-56 object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-4">
-                        On-the-Job Training (OJT) – SRM University, Sikkim
-                    </h3>
-                    <p class="text-gray-300 text-sm mt-2">
-                        Practical industry-oriented training focusing on software development and real-world problem
-                        solving.
-                    </p>
-                </div>
+        <!-- Certificates -->
+        <div id="certificates" class="hidden grid sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
-                    data-full="/asset/certificates/WebDev_Udemy.jpg">
-                    <img src="/asset/certificates/WebDev_Udemy.jpg" alt="Certificate 6"
-                        class="w-full h-56 object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-4">
-                        The Complete 2024 Web Development Bootcamp – Udemy
-                    </h3>
-                    <p class="text-gray-300 text-sm mt-2">
-                        Full-stack web development course covering HTML, CSS, JavaScript, React, Node.js, Express, and
-                        MongoDB.
-                    </p>
-                </div>
-
-                <div class="certificate-card bg-gray-800 rounded-xl p-6 cursor-pointer"
-                    data-full="/asset/certificates/cert7-full.svg">
-                    <img src="/asset/certificates/cert7.svg" alt="Certificate 7"
-                        class="w-full h-56 object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-4">
-                        Web Development Competition – ICFAI University, Sikkim
-                    </h3>
-                    <p class="text-gray-300 text-sm mt-2">
-                        Secured 3rd Prize in an inter-college web development competition showcasing frontend
-                        development skills.
-                    </p>
-                </div>
-
-
+            <!-- Govt Internship -->
+            <div class="certificate-card internship">
+                <img src="/asset/certificates/Govt_internship.jpg" loading="lazy"
+                    alt="Government Internship Certificate" class="certificate-img">
+                <h3>Government of Sikkim – IT Internship</h3>
+                <p>MERN Stack internship working on real government IT projects.</p>
+                <a download href="/asset/certificates/Govt_internship.jpg">⬇ Download</a>
             </div>
 
-            <div class="text-center mt-10">
-                <a href="index.html"
-                    class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium">Back to
-                    Home</a>
+            <!-- TATA GenAI -->
+            <div class="certificate-card ai">
+                <img src="/asset/certificates/Tata_gen_ai.png" loading="lazy"
+                    alt="TATA GenAI Certificate" class="certificate-img">
+                <h3>TATA – GenAI Powered Data Analytics</h3>
+                <p>Virtual job simulation focused on GenAI-powered analytics.</p>
+                <a download href="/asset/certificates/Tata_gen_ai.png">⬇ Download</a>
             </div>
+
+            <!-- AI ML Udemy -->
+            <div class="certificate-card ai">
+                <img src="/asset/certificates/AI-Ml_Udemy.png" loading="lazy"
+                    alt="AI ML Udemy Certificate" class="certificate-img">
+                <h3>AI & ML Bootcamp – Udemy</h3>
+                <p>Comprehensive AI, ML & Data Science training.</p>
+                <a download href="/asset/certificates/AI-Ml_Udemy.png">⬇ Download</a>
+            </div>
+
+            <!-- Web Dev Udemy -->
+            <div class="certificate-card web">
+                <img src="/asset/certificates/WebDev_Udemy.jpg" loading="lazy"
+                    alt="Web Development Certificate" class="certificate-img">
+                <h3>Web Development Bootcamp – Udemy</h3>
+                <p>HTML, CSS, JavaScript, React, Node & MongoDB.</p>
+                <a download href="/asset/certificates/WebDev_Udemy.jpg">⬇ Download</a>
+            </div>
+
+            <!-- OJT Certificate -->
+            <div class="certificate-card internship">
+                <img src="/asset/certificates/cert5.svg" loading="lazy"
+                    alt="OJT Certificate SRM University Sikkim" class="certificate-img">
+                <h3>On-the-Job Training (OJT) – SRM University, Sikkim</h3>
+                <p>
+                    Industry-oriented on-the-job training focused on software development
+                    and real-world problem solving.
+                </p>
+                <a download href="/asset/certificates/cert5-full.svg">⬇ Download</a>
+            </div>
+
+            <!-- Competition -->
+            <div class="certificate-card competition">
+                <img src="/asset/certificates/cert7.svg" loading="lazy"
+                    alt="Web Development Competition Certificate" class="certificate-img">
+                <h3>Web Development Competition – ICFAI University</h3>
+                <p>Secured 3rd Prize in inter-college competition.</p>
+                <a download href="/asset/certificates/cert7.svg">⬇ Download</a>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="index.html"
+                class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
+                Back to Home
+            </a>
         </div>
     </main>
 
-    <!-- Image Modal (shared with JS) -->
-    <div id="image-modal" class="hidden">
-        <button id="modal-close" aria-label="Close modal">&times;</button>
-        <img id="modal-img" src="" alt="Full Certificate" />
+    <!-- Image Modal -->
+    <div id="imageModal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50">
+        <button id="closeModal" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
+        <img id="modalImage" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
     </div>
 
-    <script src="/script.js"></script>
-</body>
+    <!-- JS -->
+    <script>
+        // Skeleton
+        window.addEventListener("load", () => {
+            document.getElementById("skeleton").classList.add("hidden");
+            document.getElementById("certificates").classList.remove("hidden");
+        });
 
+        // Filter
+        const buttons = document.querySelectorAll(".filter-btn");
+        const cards = document.querySelectorAll(".certificate-card");
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                buttons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                const filter = btn.dataset.filter;
+
+                cards.forEach(card => {
+                    card.style.display =
+                        filter === "all" || card.classList.contains(filter)
+                            ? "block"
+                            : "none";
+                });
+            });
+        });
+
+        // Search
+        document.getElementById("searchInput").addEventListener("input", e => {
+            const value = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                card.style.display = card.innerText.toLowerCase().includes(value)
+                    ? "block"
+                    : "none";
+            });
+        });
+
+        // Modal
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+
+        document.querySelectorAll(".certificate-img").forEach(img => {
+            img.addEventListener("click", () => {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                modalImg.src = img.src;
+            });
+        });
+
+        document.getElementById("closeModal").onclick = () => {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        };
+    </script>
+
+</body>
 </html>

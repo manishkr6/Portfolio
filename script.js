@@ -1,4 +1,4 @@
-const titles = ["AI/ML Engineer", "Data Analytics", "Frontend Developer"];
+const titles = ["AI/ML Engineer", "Data Analytics", "Web Developer"];
 
 let currentTitle = 0;
 let currentChar = 0;
