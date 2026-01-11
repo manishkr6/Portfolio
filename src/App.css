@@ -258,3 +258,10 @@ body {
     height: 200px;
   }
 }
+
+/* Typing effect */
+.typing {
+  display: inline-block;
+  padding-right: 6px;
+  transition: color 0.12s ease, opacity 0.12s ease;
+}

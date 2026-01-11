@@ -2,22 +2,40 @@ import { useEffect, useState } from "react";
 import profileImg from "../assets/profile.png";
 
 const HomeSection = () => {
-  const texts = [
-    "Frontend Developer",
-    "React Developer",
-    "AI / ML Enthusiast",
-    "Problem Solver",
-  ];
+  const texts = ["AI / ML Enthusiast", "Data Analytics", "Frontend Developer"];
 
+  const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTextIndex((prev) => (prev + 1) % texts.length);
-    }, 2000);
+    let timeout;
+    const current = texts[textIndex];
 
-    return () => clearInterval(interval);
-  }, []);
+    if (!isDeleting && displayText === current) {
+      // pause before deleting (a bit longer so users can read)
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayText === "") {
+      // move to next text after deleting
+      setIsDeleting(false);
+      setTextIndex((i) => (i + 1) % texts.length);
+    } else {
+      // make typing feel smoother by varying speed small amounts
+      const delta = Math.round(
+        isDeleting ? 40 + Math.random() * 40 : 80 + Math.random() * 40
+      ); // typing / deleting speed (ms)
+
+      timeout = setTimeout(() => {
+        setDisplayText((prev) =>
+          isDeleting
+            ? current.substring(0, prev.length - 1)
+            : current.substring(0, prev.length + 1)
+        );
+      }, delta);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, textIndex, texts]);
 
   return (
     <section
@@ -32,8 +50,11 @@ const HomeSection = () => {
               Hi, I'm <span className="gradient-text">Manish Kumar Baitha</span>
             </h1>
 
-            <h2 className="text-2xl md:text-2xl lg:text-3xl h-10 font-semibold mb-6">
-              {texts[textIndex]}
+            <h2
+              className="text-2xl md:text-2xl lg:text-3xl font-semibold mb-6"
+              aria-live="polite"
+            >
+              <span className="typing">{displayText}</span>
             </h2>
 
             <p className="text-lg text-gray-300 mb-8 max-w-lg">
