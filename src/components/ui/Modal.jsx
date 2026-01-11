@@ -12,10 +12,17 @@ const Modal = ({ open, onClose, children }) => {
 
     document.addEventListener("keydown", onKey);
 
+    // prevent background scrolling while modal is open
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
     // set focus to close button
     setTimeout(() => closeRef.current?.focus(), 0);
 
-    return () => document.removeEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [open, onClose]);
 
   if (!open) return null;
@@ -25,6 +32,8 @@ const Modal = ({ open, onClose, children }) => {
       role="dialog"
       aria-modal="true"
       className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
+      style={{ touchAction: "none" }}
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
     >
       <button
         ref={closeRef}
@@ -35,7 +44,9 @@ const Modal = ({ open, onClose, children }) => {
         &times;
       </button>
 
-      <div className="max-w-[90%] max-h-[90%] overflow-auto">{children}</div>
+      <div className="w-full h-full p-6 flex items-center justify-center overflow-hidden">
+        {children}
+      </div>
     </div>
   );
 };

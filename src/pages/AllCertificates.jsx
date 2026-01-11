@@ -101,7 +101,8 @@ const AllCertificates = () => {
       <Modal open={!!modalImg} onClose={() => setModalImg(null)}>
         <img
           src={modalImg}
-          className="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl"
+          className="max-w-[calc(100vw-96px)] max-h-[calc(100vh-96px)] object-contain rounded-xl shadow-2xl cursor-zoom-out"
+          onClick={() => setModalImg(null)}
         />
       </Modal>
     </>

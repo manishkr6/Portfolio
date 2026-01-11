@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Modal from "./ui/Modal";
 import { certificatesData } from "../assets/data";
 
 const Certificate = () => {
   const homeCertificates = certificatesData.slice(0, 3);
+  const [modalImg, setModalImg] = useState(null);
 
   return (
     <section id="certificates" className="py-20 md:px-16">
@@ -17,7 +20,9 @@ const Certificate = () => {
               <img
                 src={cert.image}
                 alt={cert.title}
-                className="certificate-img"
+                className="certificate-img cursor-zoom-in"
+                loading="lazy"
+                onClick={() => setModalImg(cert.image)}
               />
 
               <h3 className="text-lg font-semibold mt-4">{cert.title}</h3>
@@ -35,6 +40,14 @@ const Certificate = () => {
             View More Certificates
           </Link>
         </div>
+
+        <Modal open={!!modalImg} onClose={() => setModalImg(null)}>
+          <img
+            src={modalImg}
+            className="max-w-[calc(100vw-96px)] max-h-[calc(100vh-96px)] object-contain rounded-xl shadow-2xl cursor-zoom-out"
+            onClick={() => setModalImg(null)}
+          />
+        </Modal>
       </div>
     </section>
   );
