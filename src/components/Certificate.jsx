@@ -13,11 +13,11 @@ const Certificate = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-fade-in delay-100 certificate-grid">
           {homeCertificates.map((cert) => (
-            <div key={cert.id}>
+            <div key={cert.id} className="certificate-card">
               <img
                 src={cert.image}
                 alt={cert.title}
-                className="w-full h-56 object-cover rounded-md"
+                className="certificate-img"
               />
 
               <h3 className="text-lg font-semibold mt-4">{cert.title}</h3>
