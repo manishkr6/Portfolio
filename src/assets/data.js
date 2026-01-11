@@ -10,7 +10,7 @@ import webDevImg from "./web_development.jpg";
 import movieRecommendationImg from "./movie-recommendation.png";
 
 // ================= CERTIFICATE IMAGES =================
-import aiMlUdemy from "./certificates/AI-Ml_Udemy.png";
+import aiMlUdemy from "./certificates/AI-ML_Udemy.png";
 import deloitteDataAnalytics from "./certificates/Deloitte_Data_Analytics.png";
 import govtInternship from "./certificates/Govt_internship.jpg";
 import tataGenAI from "./certificates/Tata_gen_ai.png";
