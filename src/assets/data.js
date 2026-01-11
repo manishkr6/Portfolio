@@ -76,6 +76,7 @@ export const certificatesData = [
     description: "Hands-on experience with real-world data analytics tasks.",
     image: deloitteDataAnalytics,
     category: "data",
+    categories: ["data", "ai"],
   },
   {
     id: 5,

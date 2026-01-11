@@ -1,8 +1,12 @@
 import React from "react";
 
 const CertificateCard = ({ cert, onOpen }) => {
+  const categoryClass = Array.isArray(cert.categories)
+    ? cert.categories.join(" ")
+    : cert.category;
+
   return (
-    <div className={`certificate-card ${cert.category}`}>
+    <div className={`certificate-card ${categoryClass}`}>
       <img
         src={cert.image}
         alt={cert.title}

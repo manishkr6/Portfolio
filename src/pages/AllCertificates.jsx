@@ -17,7 +17,10 @@ const AllCertificates = () => {
 
   const filteredCertificates = certificatesData.filter((cert) => {
     const matchFilter =
-      activeFilter === "all" || cert.category === activeFilter;
+      activeFilter === "all" ||
+      cert.category === activeFilter ||
+      (Array.isArray(cert.categories) &&
+        cert.categories.includes(activeFilter));
 
     const matchSearch = cert.title.toLowerCase().includes(search.toLowerCase());
 
@@ -44,25 +47,29 @@ const AllCertificates = () => {
 
         {/* Filters */}
         <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {["all", "internship", "web", "ai", "competition"].map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`filter-btn ${
-                activeFilter === filter ? "active" : ""
-              }`}
-            >
-              {filter === "all"
-                ? "All"
-                : filter === "internship"
-                ? "Internship"
-                : filter === "web"
-                ? "Web Dev"
-                : filter === "ai"
-                ? "AI / ML"
-                : "Competition"}
-            </button>
-          ))}
+          {["all", "internship", "web", "ai", "data", "competition"].map(
+            (filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`filter-btn ${
+                  activeFilter === filter ? "active" : ""
+                }`}
+              >
+                {filter === "all"
+                  ? "All"
+                  : filter === "internship"
+                  ? "Internship"
+                  : filter === "web"
+                  ? "Web Dev"
+                  : filter === "ai"
+                  ? "AI / ML"
+                  : filter === "data"
+                  ? "Data"
+                  : "Competition"}
+              </button>
+            )
+          )}
         </div>
 
         {/* Skeleton */}
