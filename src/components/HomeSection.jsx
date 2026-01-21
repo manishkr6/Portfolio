@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import profileImg from "../assets/profile.png";
 
 const HomeSection = () => {
-  const texts = ["AI / ML Enthusiast", "Data Analytics", "Frontend Developer"];
+  const texts = ["AI / ML Enthusiast", "Data Analytics", "Web Developer"];
 
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
