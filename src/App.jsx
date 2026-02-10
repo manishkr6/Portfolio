@@ -1,30 +1,26 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
-
-import Home from "./pages/Home";
-import AllCertificates from "./pages/AllCertificates";
-import AIProjects from "./pages/AIprojects";
-import WebProjects from "./pages/WebDevProjects";
-import WebDevProjects from "./pages/WebDevProjects";
-import AIprojects from "./pages/AIprojects";
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Journey from './components/Journey';
+import Skills from './components/Skills';
+import Certificates from './components/Certificates';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
+    <div className="relative">
       <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/certificates" element={<AllCertificates />} />
-        <Route path="/projects/ai" element={<AIprojects />} />
-        <Route path="/projects/web" element={<WebDevProjects />} />
-      </Routes>
-
+      <main>
+        <Hero />
+        <Journey />
+        <Skills />
+        <Certificates />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
-    </BrowserRouter>
+    </div>
   );
 }
 

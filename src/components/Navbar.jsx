@@ -1,182 +1,164 @@
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import useSmoothScroll from "../hooks/useSmoothScroll";
-import useScrollSpy from "../hooks/useScrollSpy";
+import { useState, useEffect } from 'react';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("home");
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const smoothScroll = useSmoothScroll();
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [scrolled, setScrolled] = useState(false);
 
-  // Scroll spy for homepage sections
-  const spyActive = useScrollSpy(
-    ["home", "about", "skills", "certificates", "projects", "contact"],
-    { threshold: 0.6 }
-  );
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'journey', label: 'Journey' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'certificates', label: 'Certificates' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
+  ];
 
   useEffect(() => {
-    // If we're not on the home page, set active based on pathname
-    if (pathname !== "/") {
-      if (pathname.startsWith("/projects")) setActive("projects");
-      else if (pathname.startsWith("/certificates")) setActive("certificates");
-      else setActive("");
-      return;
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      // Update active section based on scroll position
+      const sections = navItems.map(item => document.getElementById(item.id));
+      const scrollPosition = window.scrollY + 100;
+
+      sections.forEach((section, index) => {
+        if (section) {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(navItems[index].id);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
     }
-
-    // On home page, use the spy
-    if (spyActive) setActive(spyActive);
-  }, [pathname, spyActive]);
-
-  const linkClass = (id) => `nav-link ${active === id ? "active" : ""}`;
-
-  const handleNavClick = (e, id) => {
-    e.preventDefault();
-    setOpen(false);
-
-    // If already on home, smooth scroll directly
-    if (pathname === "/") {
-      smoothScroll(id);
-      setActive(id);
-      return;
-    }
-
-    // If on other route, navigate to home with hash so ScrollToTop handles it
-    navigate(`/${id ? `#${id}` : ""}`);
+    setIsOpen(false);
   };
 
   return (
-    <header className="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm md:px-16">
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'glass-effect shadow-lg' : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, "home")}
-            className="text-2xl font-bold gradient-text"
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex-shrink-0"
           >
-            Manish.
-          </a>
-
-          {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8">
             <a
               href="#home"
-              onClick={(e) => handleNavClick(e, "home")}
-              className={linkClass("home")}
-              aria-current={active === "home" ? "page" : undefined}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('home');
+              }}
+              className="text-2xl font-display font-bold text-gradient"
             >
-              Home
+              &lt;MKB /&gt;
             </a>
-            <a
-              href="#about"
-              onClick={(e) => handleNavClick(e, "about")}
-              className={linkClass("about")}
-              aria-current={active === "about" ? "page" : undefined}
-            >
-              About
-            </a>
-            <a
-              href="#skills"
-              onClick={(e) => handleNavClick(e, "skills")}
-              className={linkClass("skills")}
-              aria-current={active === "skills" ? "page" : undefined}
-            >
-              Skills
-            </a>
-            <a
-              href="#certificates"
-              onClick={(e) => handleNavClick(e, "certificates")}
-              className={linkClass("certificates")}
-              aria-current={active === "certificates" ? "page" : undefined}
-            >
-              Certificate
-            </a>
-            <a
-              href="#projects"
-              onClick={(e) => handleNavClick(e, "projects")}
-              className={linkClass("projects")}
-              aria-current={active === "projects" ? "page" : undefined}
-            >
-              Projects
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "contact")}
-              className={linkClass("contact")}
-              aria-current={active === "contact" ? "page" : undefined}
-            >
-              Contact
-            </a>
-          </nav>
+          </motion.div>
 
-          {/* Mobile Button */}
-          <button
-            className="md:hidden focus:outline-none"
-            onClick={() => setOpen(!open)}
-          >
-            <i className="fas fa-bars text-xl"></i>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {open && (
-          <div className="md:hidden mt-4">
-            <div className="flex flex-col space-y-3">
-              <a
-                href="#home"
-                onClick={(e) => handleNavClick(e, "home")}
-                className={`${linkClass("home")} py-2`}
-                aria-current={active === "home" ? "page" : undefined}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item, index) => (
+              <motion.a
+                key={item.id}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.id);
+                }}
+                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${
+                  activeSection === item.id
+                    ? 'text-primary-400'
+                    : 'text-gray-300 hover:text-primary-400'
+                }`}
               >
-                Home
-              </a>
-              <a
-                href="#about"
-                onClick={(e) => handleNavClick(e, "about")}
-                className={`${linkClass("about")} py-2`}
-                aria-current={active === "about" ? "page" : undefined}
-              >
-                About
-              </a>
-              <a
-                href="#skills"
-                onClick={(e) => handleNavClick(e, "skills")}
-                className={`${linkClass("skills")} py-2`}
-                aria-current={active === "skills" ? "page" : undefined}
-              >
-                Skills
-              </a>
-              <a
-                href="#certificates"
-                onClick={(e) => handleNavClick(e, "certificates")}
-                className={`${linkClass("certificates")} py-2`}
-                aria-current={active === "certificates" ? "page" : undefined}
-              >
-                Certificate
-              </a>
-              <a
-                href="#projects"
-                onClick={(e) => handleNavClick(e, "projects")}
-                className={`${linkClass("projects")} py-2`}
-                aria-current={active === "projects" ? "page" : undefined}
-              >
-                Projects
-              </a>
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, "contact")}
-                className={`${linkClass("contact")} py-2`}
-                aria-current={active === "contact" ? "page" : undefined}
-              >
-                Contact
-              </a>
-            </div>
+                {item.label}
+                {activeSection === item.id && (
+                  <motion.div
+                    layoutId="activeSection"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-400"
+                    initial={false}
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="absolute inset-0 rounded-lg bg-primary-500/0 group-hover:bg-primary-500/10 transition-colors duration-300" />
+              </motion.a>
+            ))}
           </div>
-        )}
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-300 hover:text-primary-400 transition-colors p-2"
+            >
+              {isOpen ? <HiX size={28} /> : <HiMenuAlt3 size={28} />}
+            </button>
+          </div>
+        </div>
       </div>
-    </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden glass-effect border-t border-primary-500/20"
+          >
+            <div className="px-4 py-4 space-y-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.id);
+                  }}
+                  className={`block px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
+                    activeSection === item.id
+                      ? 'bg-primary-500/20 text-primary-400 border-l-4 border-primary-400'
+                      : 'text-gray-300 hover:bg-primary-500/10 hover:text-primary-400'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
