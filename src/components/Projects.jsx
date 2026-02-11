@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX, FiGithub, FiExternalLink } from "react-icons/fi";
 import { projectsData, projectCategories } from "../data/projectsData";
@@ -6,6 +6,34 @@ import { projectsData, projectCategories } from "../data/projectsData";
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  // Lock body scroll when any modal is open (prevents background scrolling)
+  useEffect(() => {
+    if (selectedCategory || selectedProject) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflowY = "hidden";
+    } else {
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflowY = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflowY = "";
+    };
+  }, [selectedCategory, selectedProject]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -194,14 +222,13 @@ const Projects = () => {
         </motion.div>
       </div>
 
-      {/* Full Screen Projects Modal */}
+      {/* Full Screen Category/Projects Modal */}
       <AnimatePresence>
         {selectedCategory && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedCategory(null)}
             className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex flex-col"
           >
             {/* Header */}
@@ -233,21 +260,16 @@ const Projects = () => {
                   animate="visible"
                   className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
-                  {selectedCategory.id === "web"
-                    ? projectsData.webDev.map((project) => (
-                        <ProjectCard
-                          key={project.id}
-                          project={project}
-                          onClick={() => setSelectedProject(project)}
-                        />
-                      ))
-                    : projectsData.aiMl.map((project) => (
-                        <ProjectCard
-                          key={project.id}
-                          project={project}
-                          onClick={() => setSelectedProject(project)}
-                        />
-                      ))}
+                  {(selectedCategory.id === "web"
+                    ? projectsData.webDev
+                    : projectsData.aiMl
+                  ).map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      onClick={() => setSelectedProject(project)}
+                    />
+                  ))}
                 </motion.div>
               </div>
             </div>
@@ -262,15 +284,19 @@ const Projects = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setSelectedProject(null);
+              }
+            }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4 overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="glass-effect rounded-2xl max-w-5xl w-full my-auto"
+              className="glass-effect rounded-2xl max-w-5xl w-full my-auto relative"
             >
               {/* Close Button */}
               <button
