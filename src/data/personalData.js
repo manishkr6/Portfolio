@@ -10,5 +10,5 @@ export const personalData = {
   linkedin: "https://linkedin.com/in/manishbaitha",
   twitter: "https://twitter.com/manishbaitha",
   resume: "#",
-  profileImage: "https://ik.imagekit.io/manishkr5487/My-Photo/manish%20profile.png" // Replace with your actual image
+  profileImage: "https://ik.imagekit.io/manishkr5487/My-Photo/manish%20profile.png",
 };
