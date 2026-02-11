@@ -35,11 +35,6 @@ All data is separated for easy customization:
 4. **certificatesData.js** - Certificates with modal functionality
 5. **projectsData.js** - Web Dev and AI/ML project portfolios
 
-### 4. Documentation
-1. **START_HERE.md** - Quick start guide (Read this first!)
-2. **README.md** - Complete project documentation
-3. **SETUP_GUIDE.md** - Detailed customization guide
-
 ---
 
 ## 🎨 Design Features
@@ -164,6 +159,19 @@ All data is separated for easy customization:
   "vite": "^5.0.8"
 }
 ```
+## 📂 Project Structure
+
+```
+portfolio-manish/
+├── src/
+│   ├── components/        # All UI components
+│   ├── data/             # YOUR DATA FILES - Edit these!
+│   ├── App.jsx           # Main app
+│   └── index.css         # Global styles
+├── index.html
+├── package.json
+└── README.md             # Full documentation
+```
 
 ### File Structure
 ```
@@ -190,11 +198,6 @@ npm run dev
 ```bash
 npm run build
 ```
-
-### Deploy
-- **Vercel:** Push to GitHub → Import → Deploy
-- **Netlify:** Build → Upload dist folder
-- **GitHub Pages:** `npm run deploy` (after setup)
 
 ---
 
@@ -253,39 +256,4 @@ Priority order for customization:
 - ✅ Safari (latest)
 - ✅ Edge (latest)
 - ✅ Mobile browsers
-
 ---
-
-## 🎯 Next Steps
-
-1. Read **START_HERE.md** for quick start
-2. Run `npm install` and `npm run dev`
-3. Update your personal information
-4. Add your projects and certificates
-5. Deploy to Vercel or Netlify
-6. Share your portfolio!
-
----
-
-## 📦 Package Size
-
-- Development: ~150 MB (includes node_modules)
-- Production Build: ~500 KB (optimized and minified)
-- Initial Load: ~200 KB (with code splitting)
-
----
-
-## 💡 Tips
-
-- Use high-quality images (WebP format recommended)
-- Keep descriptions concise but informative
-- Update regularly with new projects
-- Test on multiple devices
-- Optimize images before uploading
-- Use HTTPS for all external resources
-
----
-
-**Your portfolio is ready to showcase your skills to the world! 🌟**
-
-For any questions, check the documentation files or the inline code comments.
