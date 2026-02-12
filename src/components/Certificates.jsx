@@ -26,10 +26,14 @@ const Certificates = () => {
 
     if (showAll || selectedCert) {
       // Capture current scroll position before locking
-      scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      scrollY =
+        window.scrollY ||
+        window.pageYOffset ||
+        document.documentElement.scrollTop;
 
       // Compensate for scrollbar width (prevents layout shift)
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
       // Lock body scroll
@@ -122,7 +126,10 @@ const Certificates = () => {
   };
 
   return (
-    <section id="certificates" className="py-16 px-4 sm:py-20 md:py-24 relative overflow-hidden">
+    <section
+      id="certificates"
+      className="py-16 px-4 sm:py-20 md:py-24 relative overflow-hidden"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
       <div className="absolute -bottom-20 left-0 right-0 h-96 bg-gradient-to-t from-purple-900/10 to-transparent blur-3xl" />
@@ -191,7 +198,9 @@ const Certificates = () => {
                     {cert.description}
                   </p>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-primary-400 font-medium">{cert.issuer}</span>
+                    <span className="text-primary-400 font-medium">
+                      {cert.issuer}
+                    </span>
                     <FiExternalLink className="text-gray-400 group-hover:text-primary-400 transition-colors" />
                   </div>
                 </div>
@@ -214,7 +223,9 @@ const Certificates = () => {
               className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 hover:bg-primary-500 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary-500/30 text-sm sm:text-base"
             >
               View All Certificates
-              <span className="text-xs sm:text-sm opacity-80">({certificatesData.length})</span>
+              <span className="text-xs sm:text-sm opacity-80">
+                ({certificatesData.length})
+              </span>
             </button>
           </motion.div>
         )}
@@ -272,7 +283,9 @@ const Certificates = () => {
                     }`}
                   >
                     {category.name}
-                    <span className="ml-1.5 opacity-70 text-xs sm:text-sm">({category.count})</span>
+                    <span className="ml-1.5 opacity-70 text-xs sm:text-sm">
+                      ({category.count})
+                    </span>
                   </button>
                 ))}
               </motion.div>
@@ -318,7 +331,9 @@ const Certificates = () => {
                           {cert.description}
                         </p>
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-primary-400 font-medium">{cert.issuer}</span>
+                          <span className="text-primary-400 font-medium">
+                            {cert.issuer}
+                          </span>
                           <FiExternalLink className="text-gray-400 group-hover:text-primary-400 transition-colors" />
                         </div>
                       </div>
@@ -403,7 +418,9 @@ const Certificates = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6 text-sm sm:text-base">
                   <div>
                     <p className="text-gray-500 mb-1">Issue Date</p>
-                    <p className="text-white font-medium">{selectedCert.date}</p>
+                    <p className="text-white font-medium">
+                      {selectedCert.date}
+                    </p>
                   </div>
                   <div>
                     <p className="text-gray-500 mb-1">Credential ID</p>
@@ -414,7 +431,9 @@ const Certificates = () => {
                 </div>
 
                 <div className="mb-6">
-                  <p className="text-gray-500 mb-2 text-sm sm:text-base">Description</p>
+                  <p className="text-gray-500 mb-2 text-sm sm:text-base">
+                    Description
+                  </p>
                   <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                     {selectedCert.description}
                   </p>
@@ -422,7 +441,9 @@ const Certificates = () => {
 
                 <div className="flex flex-wrap justify-between items-center gap-4">
                   <div>
-                    <p className="text-gray-500 mb-3 text-sm sm:text-base">Skills Covered</p>
+                    <p className="text-gray-500 mb-3 text-sm sm:text-base">
+                      Skills Covered
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {selectedCert.skills.map((skill, index) => (
                         <span

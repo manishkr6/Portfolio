@@ -14,7 +14,7 @@ const About = () => {
 
   const aboutText = {
     intro:
-      "Hi, I'm Manish Kumar Baitha — an aspiring AI & Machine Learning Engineer, Data Science enthusiast, and passionate Frontend Web Developer. I enjoy turning ideas into intelligent, data-driven solutions and clean, user-friendly web applications.",
+      "Hi, I'm Manish Kumar Baitha — an aspiring AI & Machine Learning Engineer, Data Science enthusiast, and passionate Web Developer. I enjoy turning ideas into intelligent, data-driven solutions and clean, user-friendly web applications.",
     skills:
       "My skillset includes Python, Pandas, NumPy, Matplotlib, Scikit-learn, TensorFlow, and SQL for AI, ML, and analytics, along with HTML, CSS, JavaScript, React, Node.js, Express.js, and MongoDB for web development. I love building predictive models, analyzing data, visualizing insights, and creating responsive, interactive web tools.",
     personal:

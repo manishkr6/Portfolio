@@ -22,267 +22,110 @@ export const projectsData = {
         "Real-time notifications",
         "Advanced reporting dashboard",
       ],
-      github: "#",
-      live: "#",
+      github: "https://github.com/manishkr6/govt-it-asset-management",
+      live: "https://github.com/manishkr6/govt-it-asset-management",
       category: "Full Stack",
     },
     {
       id: 2,
-      title: "E-Commerce Platform",
+      title: "Sikkim Hotel Booking & Travel Guide Platform",
       description:
-        "Modern e-commerce platform with shopping cart, payment integration, and admin dashboard.",
+        "A full-stack travel and hotel booking platform with Clerk authentication, allowing users to explore Sikkim districts, discover tourist places, and book hotels online.",
+
       image:
-        "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1630&q=80",
+
       longDescription:
-        "Full-featured e-commerce platform with product management, shopping cart, secure payment processing, order tracking, and comprehensive admin dashboard for inventory and sales management.",
+        "A modern MERN-based travel and hotel booking web application designed specifically for Sikkim tourism. Users can explore detailed travel pages for all four districts (East, West, North, and South Sikkim), view attractions and travel information, and book hotels based on availability. The platform includes secure authentication using Clerk, real-time room booking, booking history management, and an admin panel for managing hotels and listings. Built with a responsive UI to ensure smooth performance across devices.",
+
       technologies: [
         { name: "React", color: "cyan" },
-        { name: "Redux", color: "purple" },
         { name: "Node.js", color: "green" },
+        { name: "Express.js", color: "gray" },
         { name: "MongoDB", color: "emerald" },
-        { name: "Stripe", color: "indigo" },
+        { name: "Clerk Auth", color: "purple" },
+        { name: "Tailwind CSS", color: "sky" },
       ],
+
       features: [
-        "Product catalog with search",
-        "Shopping cart & wishlist",
-        "Payment integration",
-        "Order management",
+        "Clerk login & authentication",
+        "4 district travel guide pages (East, West, North, South Sikkim)",
+        "Hotel & room listing with images",
+        "Search, filter & availability check",
+        "Online booking & reservation system",
+        "Booking history dashboard",
+        "Admin panel for hotel management",
+        "Fully responsive design",
       ],
-      github: "#",
-      live: "#",
-      category: "Full Stack",
-    },
-    {
-      id: 3,
-      title: "Task Management Dashboard",
-      description:
-        "Collaborative task management application with real-time updates and team collaboration features.",
-      image:
-        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop",
-      longDescription:
-        "A collaborative project management tool featuring real-time task updates, team collaboration, deadline tracking, and productivity analytics with an intuitive drag-and-drop interface.",
-      technologies: [
-        { name: "React", color: "cyan" },
-        { name: "TypeScript", color: "blue" },
-        { name: "Firebase", color: "yellow" },
-        { name: "Material-UI", color: "indigo" },
-      ],
-      features: [
-        "Drag & drop interface",
-        "Real-time collaboration",
-        "Activity tracking",
-        "Custom workflows",
-      ],
-      github: "#",
-      live: "#",
-      category: "Frontend",
-    },
-    {
-      id: 4,
-      title: "Social Media Dashboard",
-      description:
-        "Analytics dashboard for social media metrics with data visualization and insights.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
-      longDescription:
-        "Comprehensive social media analytics platform providing insights into engagement metrics, audience demographics, content performance, and trend analysis with interactive visualizations.",
-      technologies: [
-        { name: "React", color: "cyan" },
-        { name: "Chart.js", color: "pink" },
-        { name: "REST API", color: "green" },
-        { name: "Tailwind", color: "blue" },
-      ],
-      features: [
-        "Real-time analytics",
-        "Interactive charts",
-        "Performance metrics",
-        "Export reports",
-      ],
-      github: "#",
-      live: "#",
-      category: "Frontend",
-    },
-    {
-      id: 5,
-      title: "Blog Platform",
-      description:
-        "Full-featured blogging platform with markdown support and SEO optimization.",
-      image:
-        "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=500&fit=crop",
-      longDescription:
-        "Modern blogging platform with markdown editor, SEO optimization, comment system, and analytics. Features include draft management, scheduled publishing, and social media integration.",
-      technologies: [
-        { name: "Next.js", color: "gray" },
-        { name: "MDX", color: "yellow" },
-        { name: "PostgreSQL", color: "blue" },
-        { name: "Vercel", color: "black" },
-      ],
-      features: [
-        "Markdown editor",
-        "SEO optimization",
-        "Comment system",
-        "Analytics integration",
-      ],
-      github: "#",
-      live: "#",
+
+      github: "https://github.com/manishkr6/sikkim-luxlodge",
+      live: "https://sikkim-luxlodge.vercel.app/",
       category: "Full Stack",
     },
   ],
+
   aiMl: [
     {
       id: 1,
-      title: "Image Classification System",
+      title: "Heart Health Predictor",
       description:
-        "Deep learning model for image classification using Convolutional Neural Networks with high accuracy.",
+        "Machine learning system that predicts heart disease risk based on medical parameters like age, blood pressure, and cholesterol.",
+
       image:
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&fit=crop",
+
       longDescription:
-        "Advanced image classification system using deep learning. Trained on large datasets to classify images into multiple categories with high accuracy. Implements transfer learning and data augmentation techniques.",
+        "A healthcare-focused machine learning application that analyzes patient health metrics to predict the risk of heart disease. Implemented multiple models including Logistic Regression, Random Forest, and SVM, and compared their performance to achieve better accuracy. Includes data preprocessing, visualization, and an interactive Streamlit interface for quick real-time predictions with future web app integration.",
+
       technologies: [
         { name: "Python", color: "blue" },
-        { name: "TensorFlow", color: "orange" },
-        { name: "Keras", color: "red" },
-        { name: "OpenCV", color: "green" },
-        { name: "Flask", color: "gray" },
-      ],
-      features: [
-        "CNN architecture",
-        "Transfer learning",
-        "Real-time prediction",
-        "Model optimization",
-      ],
-      github: "#",
-      live: "#",
-      category: "Computer Vision",
-    },
-    {
-      id: 2,
-      title: "Sentiment Analysis Tool",
-      description:
-        "NLP-based sentiment analysis tool for social media posts and product reviews.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
-      longDescription:
-        "Natural Language Processing tool for analyzing sentiment in text data. Uses advanced NLP techniques to classify text as positive, negative, or neutral with detailed emotion analysis and visualization.",
-      technologies: [
-        { name: "Python", color: "blue" },
-        { name: "NLTK", color: "green" },
-        { name: "Transformers", color: "yellow" },
-        { name: "FastAPI", color: "teal" },
-        { name: "React", color: "cyan" },
-      ],
-      features: [
-        "Multi-language support",
-        "Emotion detection",
-        "Batch processing",
-        "API integration",
-      ],
-      github: "#",
-      live: "#",
-      category: "NLP",
-    },
-    {
-      id: 3,
-      title: "House Price Predictor",
-      description:
-        "Machine learning model to predict house prices based on various features using regression algorithms.",
-      image:
-        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=500&fit=crop",
-      longDescription:
-        "Predictive analytics system for real estate pricing. Uses multiple regression algorithms and feature engineering to accurately predict house prices based on location, size, amenities, and market trends.",
-      technologies: [
-        { name: "Python", color: "blue" },
-        { name: "Scikit-learn", color: "orange" },
         { name: "Pandas", color: "purple" },
+        { name: "NumPy", color: "yellow" },
+        { name: "Scikit-learn", color: "orange" },
+        { name: "Matplotlib", color: "green" },
         { name: "Streamlit", color: "red" },
-        { name: "Matplotlib", color: "blue" },
       ],
+
       features: [
-        "Feature engineering",
-        "Multiple algorithms",
-        "Interactive UI",
-        "Model comparison",
+        "Health data preprocessing",
+        "Multiple ML model comparison",
+        "Risk prediction with high accuracy",
+        "Interactive Streamlit dashboard",
       ],
-      github: "#",
-      live: "#",
+
+      github: "https://github.com/manishkr6/heart-health-predictor",
+      live: "https://heart-health-predictor.streamlit.app/",
       category: "Machine Learning",
     },
     {
-      id: 4,
-      title: "Chatbot Assistant",
+      id: 2,
+      title: "Movie Recommendation System",
       description:
-        "AI-powered chatbot using natural language understanding for customer support automation.",
+        "Content-based movie recommender that suggests similar movies using cosine similarity and machine learning.",
+
       image:
-        "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&h=500&fit=crop",
+
       longDescription:
-        "Intelligent conversational AI system powered by advanced NLP models. Provides automated customer support with context awareness, multi-turn conversations, and seamless human handoff capabilities.",
+        "A content-based movie recommendation system built with Python and Machine Learning that suggests movies based on similarity of genres, keywords, and features. Uses cosine similarity to compute recommendations and provides an interactive Streamlit interface where users can select a movie and instantly view related suggestions. Designed for fast performance and an intuitive user experience.",
+
       technologies: [
         { name: "Python", color: "blue" },
-        { name: "Rasa", color: "purple" },
-        { name: "spaCy", color: "cyan" },
-        { name: "MongoDB", color: "green" },
-        { name: "WebSocket", color: "yellow" },
-      ],
-      features: [
-        "Intent recognition",
-        "Context awareness",
-        "Multi-language",
-        "Analytics dashboard",
-      ],
-      github: "#",
-      live: "#",
-      category: "NLP",
-    },
-    {
-      id: 5,
-      title: "Object Detection System",
-      description:
-        "Real-time object detection and tracking system using YOLO algorithm for surveillance applications.",
-      image:
-        "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop",
-      longDescription:
-        "Advanced computer vision system for real-time object detection and tracking. Implements state-of-the-art YOLO algorithm for high-speed detection with applications in security, traffic monitoring, and automation.",
-      technologies: [
-        { name: "Python", color: "blue" },
-        { name: "PyTorch", color: "red" },
-        { name: "YOLO", color: "yellow" },
-        { name: "OpenCV", color: "green" },
-        { name: "CUDA", color: "green" },
-      ],
-      features: [
-        "Real-time detection",
-        "Multi-object tracking",
-        "Custom training",
-        "GPU acceleration",
-      ],
-      github: "#",
-      live: "#",
-      category: "Computer Vision",
-    },
-    {
-      id: 6,
-      title: "Recommendation System",
-      description:
-        "Collaborative filtering-based recommendation engine for personalized content suggestions.",
-      image:
-        "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=500&fit=crop",
-      longDescription:
-        "Intelligent recommendation system using collaborative and content-based filtering techniques. Provides personalized suggestions based on user behavior, preferences, and similarity analysis with continuous learning capabilities.",
-      technologies: [
-        { name: "Python", color: "blue" },
+        { name: "Pandas", color: "purple" },
+        { name: "NumPy", color: "yellow" },
         { name: "Scikit-learn", color: "orange" },
-        { name: "Surprise", color: "purple" },
-        { name: "Redis", color: "red" },
-        { name: "FastAPI", color: "teal" },
+        { name: "Streamlit", color: "red" },
       ],
+
       features: [
-        "Hybrid filtering",
-        "Cold start handling",
-        "Real-time updates",
-        "A/B testing",
+        "Content-based filtering",
+        "Cosine similarity algorithm",
+        "Instant movie suggestions",
+        "Interactive Streamlit UI",
       ],
-      github: "#",
-      live: "#",
+
+      github: "https://github.com/manishkr6/movie-recommendation-system",
+      live: "https://manishkr6-movie-recommendation-system-app-xzcclt.streamlit.app/",
       category: "Machine Learning",
     },
   ],

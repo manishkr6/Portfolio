@@ -45,7 +45,7 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3.5xl sm:text-4xl md:text-5xl font-display font-bold text-gradient mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gradient mb-3 sm:mb-4">
             Skills & Expertise
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
