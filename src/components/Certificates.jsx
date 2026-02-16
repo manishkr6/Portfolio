@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiX,
@@ -19,17 +19,15 @@ const Certificates = () => {
   const [selectedCert, setSelectedCert] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
+  const scrollRef = useRef(0);
 
   // Reliable body scroll lock + scroll position restoration
   useEffect(() => {
-    let scrollY = 0;
-
     if (showAll || selectedCert) {
-      // Capture current scroll position before locking
-      scrollY =
-        window.scrollY ||
-        window.pageYOffset ||
-        document.documentElement.scrollTop;
+      // Only capture scroll position if body is not already fixed
+      if (document.body.style.position !== "fixed") {
+        scrollRef.current = window.scrollY;
+      }
 
       // Compensate for scrollbar width (prevents layout shift)
       const scrollbarWidth =
@@ -38,16 +36,11 @@ const Certificates = () => {
 
       // Lock body scroll
       document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
+      document.body.style.top = `-${scrollRef.current}px`;
       document.body.style.left = "0";
       document.body.style.right = "0";
       document.body.style.overflowY = "hidden";
     } else {
-      // Retrieve saved scroll position
-      const savedScrollY = document.body.style.top
-        ? -parseInt(document.body.style.top, 10)
-        : scrollY;
-
       // Reset body styles
       document.body.style.position = "";
       document.body.style.top = "";
@@ -58,13 +51,15 @@ const Certificates = () => {
 
       // Restore exact scroll position instantly
       window.scrollTo({
-        top: savedScrollY,
+        top: scrollRef.current,
         left: 0,
         behavior: "instant",
       });
     }
+  }, [showAll, selectedCert]);
 
-    // Cleanup on unmount or when dependencies change
+  // Cleanup styles on unmount only
+  useEffect(() => {
     return () => {
       document.body.style.position = "";
       document.body.style.top = "";
@@ -73,7 +68,7 @@ const Certificates = () => {
       document.body.style.paddingRight = "";
       document.body.style.overflowY = "";
     };
-  }, [showAll, selectedCert]);
+  }, []);
 
   const displayedCerts = showAll
     ? activeCategory === "all"

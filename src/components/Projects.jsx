@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX, FiGithub, FiExternalLink } from "react-icons/fi";
 import { projectsData, projectCategories } from "../data/projectsData";
@@ -6,34 +6,38 @@ import { projectsData, projectCategories } from "../data/projectsData";
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const scrollRef = useRef(0);
 
   // Lock body scroll when any modal is open (prevents background scrolling)
   useEffect(() => {
     if (selectedCategory || selectedProject) {
-      // Save current scroll position
-      const scrollY = window.scrollY;
+      if (document.body.style.position !== "fixed") {
+        scrollRef.current = window.scrollY;
+      }
+      
       document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
+      document.body.style.top = `-${scrollRef.current}px`;
       document.body.style.width = "100%";
       document.body.style.overflowY = "hidden";
     } else {
       // Restore scroll position
-      const scrollY = document.body.style.top;
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       document.body.style.overflowY = "";
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      window.scrollTo(0, scrollRef.current);
     }
+  }, [selectedCategory, selectedProject]);
 
-    // Cleanup on unmount
+  // Cleanup on unmount
+  useEffect(() => {
     return () => {
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       document.body.style.overflowY = "";
     };
-  }, [selectedCategory, selectedProject]);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FiHeart, FiGithub, FiLinkedin, FiTwitter, FiMail } from 'react-icons/fi';
+import { FiHeart, FiGithub, FiLinkedin, FiTwitter, FiMail, FiInstagram } from 'react-icons/fi';
 import { personalData } from '../data/personalData';
 
 const Footer = () => {
@@ -16,7 +16,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: FiGithub, url: personalData.github, label: 'GitHub' },
     { icon: FiLinkedin, url: personalData.linkedin, label: 'LinkedIn' },
-    { icon: FiTwitter, url: personalData.twitter, label: 'Twitter' },
+    { icon: FiInstagram, url: personalData.instagram, label: 'Instagram' },
     { icon: FiMail, url: `mailto:${personalData.email}`, label: 'Email' },
   ];
 

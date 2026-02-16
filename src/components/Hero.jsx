@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiDownload } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiDownload, FiInstagram } from "react-icons/fi";
 import { HiLocationMarker } from "react-icons/hi";
 import { personalData } from "../data/personalData";
 
@@ -8,7 +8,7 @@ const Hero = () => {
   const socialLinks = [
     { icon: FiGithub, url: personalData.github, label: "GitHub" },
     { icon: FiLinkedin, url: personalData.linkedin, label: "LinkedIn" },
-    { icon: FiTwitter, url: personalData.twitter, label: "Twitter" },
+    { icon: FiInstagram, url: personalData.instagram, label: "Instagram" },
     { icon: FiMail, url: `mailto:${personalData.email}`, label: "Email" },
   ];
 

@@ -46,7 +46,7 @@ export const journeyData = [
     type: "internship",
     title: "InfoSec Solutions Developer",
     organization: "SH1ELD Tech InfoSec Solutions",
-    duration: "January 2025 - March 2025",
+    duration: "January 2026 - March 2026",
     description: "Worked on developing security solutions and implementing best practices for information security in web applications.",
     status: "Ongoing",
     icon: "work",
