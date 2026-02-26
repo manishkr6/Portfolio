@@ -33,7 +33,7 @@ export const projectsData = {
         "A full-stack travel and hotel booking platform with Clerk authentication, allowing users to explore Sikkim districts, discover tourist places, and book hotels online.",
 
       image:
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1630&q=80",
+        "https://ik.imagekit.io/manishkr5487/My-Photo/Sikkim-LuxLodge.png",
 
       longDescription:
         "A modern MERN-based travel and hotel booking web application designed specifically for Sikkim tourism. Users can explore detailed travel pages for all four districts (East, West, North, and South Sikkim), view attractions and travel information, and book hotels based on availability. The platform includes secure authentication using Clerk, real-time room booking, booking history management, and an admin panel for managing hotels and listings. Built with a responsive UI to ensure smooth performance across devices.",
@@ -53,8 +53,6 @@ export const projectsData = {
         "Hotel & room listing with images",
         "Search, filter & availability check",
         "Online booking & reservation system",
-        "Booking history dashboard",
-        "Admin panel for hotel management",
         "Fully responsive design",
       ],
 

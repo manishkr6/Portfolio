@@ -9,7 +9,7 @@ export const certificatesData = [
       "MERN Stack internship working on real government IT projects.",
     image:
       "https://ik.imagekit.io/manishkr5487/certificate/Govt%20of%20Sikkim%20Internships%20.jpg?updatedAt=1757424281201",
-    credentialId: "CERT-12345",
+    credentialId: "",
     skills: ["React", "Node.js", "MongoDB", "Express"],
   },
   {

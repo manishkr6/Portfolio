@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { id: "home", label: "Home" },
@@ -20,6 +23,8 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      if (location.pathname !== "/") return;
 
       // Update active section based on scroll position
       const sections = navItems.map((item) => document.getElementById(item.id));
@@ -40,28 +45,42 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const scrollToSection = (id) => {
     // Close menu first
     setIsOpen(false);
 
-    // Delay scroll to ensure menu animation doesn't interfere
-    setTimeout(() => {
-      const element = document.getElementById(id);
-      if (element) {
-        const navbar = document.querySelector("nav");
-        const navbarHeight = navbar ? navbar.offsetHeight : 80;
-        const offset = navbarHeight + 20; // 20px additional spacing
-        const elementPosition =
-          element.getBoundingClientRect().top + window.scrollY;
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for navigation and mount before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const navbar = document.querySelector("nav");
+          const navbarHeight = navbar ? navbar.offsetHeight : 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elementPosition - navbarHeight - 20,
+            behavior: "smooth",
+          });
+        }
+      }, 300);
+      return;
+    }
 
-        window.scrollTo({
-          top: elementPosition - offset,
-          behavior: "smooth",
-        });
-      }
-    }, 100);
+    const element = document.getElementById(id);
+    if (element) {
+      const navbar = document.querySelector("nav");
+      const navbarHeight = navbar ? navbar.offsetHeight : 80;
+      const offset = navbarHeight + 20;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
