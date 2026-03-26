@@ -5,11 +5,13 @@ import { projectsData } from "../data/projectsData";
 import { useEffect } from "react";
 
 const ProjectDetails = () => {
-  const { id } = useParams();
+  const { categoryId, id } = useParams();
   const navigate = useNavigate();
 
-  // Find project in both categories
-  const allProjects = [...projectsData.webDev, ...projectsData.aiMl];
+  // Find project in the corresponding category
+  const allProjects = categoryId === "web-development" 
+    ? projectsData.webDev 
+    : (categoryId === "ai-ml-data-science" ? projectsData.aiMl : [...projectsData.webDev, ...projectsData.aiMl]);
   const project = allProjects.find((p) => p.id === parseInt(id));
 
   if (!project) {
@@ -57,7 +59,7 @@ const ProjectDetails = () => {
         <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          onClick={() => navigate("/#projects")}
+          onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-primary-400 hover:text-primary-300 mb-8 font-medium transition-colors"
         >
           <FiArrowLeft size={20} />

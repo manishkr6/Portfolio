@@ -43,12 +43,12 @@ const CertificateDetails = () => {
   return (
     <div className="min-h-screen bg-dark-500 pt-24 pb-20 px-4">
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
-      
+
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          onClick={() => navigate("/#certificates")}
+          onClick={() => navigate("/certificates")}
           className="flex items-center gap-2 text-primary-400 hover:text-primary-300 mb-8 font-medium transition-colors"
         >
           <FiArrowLeft size={20} />
@@ -89,21 +89,13 @@ const CertificateDetails = () => {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 text-base">
+            <div className="grid grid-cols-1 gap-8 mb-10 text-base">
               <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
                 <p className="text-gray-500 mb-1 flex items-center gap-2">
                   <FiCalendar size={16} /> Issue Date
                 </p>
                 <p className="text-white font-semibold text-lg">
                   {cert.date}
-                </p>
-              </div>
-              <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
-                <p className="text-gray-500 mb-1 flex items-center gap-2">
-                  <FiAward size={16} /> Credential ID
-                </p>
-                <p className="text-white font-semibold text-lg font-mono break-all">
-                  {cert.credentialId || "N/A"}
                 </p>
               </div>
             </div>
