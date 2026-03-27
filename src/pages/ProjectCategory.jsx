@@ -101,7 +101,7 @@ const ProjectCategory = () => {
                 key={project.id}
                 variants={cardVariants}
                 whileHover={{ y: -10 }}
-                onClick={() => navigate(`/project/${project.id}`)}
+                onClick={() => navigate(`/project/${categoryId}/${project.id}`)}
                 className="glass-effect rounded-2xl overflow-hidden hover-glow cursor-pointer group"
               >
                 {/* Project Image */}

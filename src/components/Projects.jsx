@@ -26,6 +26,19 @@ const Projects = () => {
     },
   };
 
+  const getTechColor = (color) => {
+    switch (color) {
+      case "blue": return "bg-blue-500/10 text-blue-400 border-blue-500/20";
+      case "green": return "bg-green-500/10 text-green-400 border-green-500/20";
+      case "purple": return "bg-purple-500/10 text-purple-400 border-purple-500/20";
+      case "yellow": return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
+      case "red": return "bg-red-500/10 text-red-400 border-red-500/20";
+      case "pink": return "bg-pink-500/10 text-pink-400 border-pink-500/20";
+      case "cyan": return "bg-cyan-500/10 text-cyan-400 border-cyan-500/20";
+      default: return "bg-primary-500/10 text-primary-400 border-primary-500/20";
+    }
+  };
+
   const CategoryCard = ({ category }) => {
     // Generate route ID from category ID
     const routeId = category.id === "web" ? "web-development" : "ai-ml-data-science";
@@ -89,54 +102,59 @@ const Projects = () => {
     );
   };
 
-  const ProjectCard = ({ project }) => (
-    <motion.div
-      variants={cardVariants}
-      whileHover={{ y: -5 }}
-      onClick={() => navigate(`/project/${project.id}`)}
-      className="glass-effect rounded-xl overflow-hidden hover-glow cursor-pointer group"
-    >
-      {/* Project Image */}
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-500 via-dark-500/50 to-transparent" />
-        <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary-500/20 backdrop-blur-sm text-primary-400 text-xs font-medium">
-          {project.category}
+  const ProjectCard = ({ project }) => {
+    // Determine categoryId for navigation
+    const categoryId = project.category === "Machine Learning" ? "ai-ml-data-science" : "web-development";
+    
+    return (
+      <motion.div
+        variants={cardVariants}
+        whileHover={{ y: -5 }}
+        onClick={() => navigate(`/project/${categoryId}/${project.id}`)}
+        className="glass-effect rounded-xl overflow-hidden hover-glow cursor-pointer group"
+      >
+        {/* Project Image */}
+        <div className="relative h-48 overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-500 via-dark-500/50 to-transparent" />
+          <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary-500/20 backdrop-blur-sm text-primary-400 text-xs font-medium">
+            {project.category}
+          </div>
         </div>
-      </div>
 
-      {/* Project Info */}
-      <div className="p-5">
-        <h3 className="text-xl font-bold text-white group-hover:text-primary-400 transition-colors mb-2">
-          {project.title}
-        </h3>
-        <p className="text-gray-400 mb-3 line-clamp-2 text-sm">
-          {project.description}
-        </p>
+        {/* Project Info */}
+        <div className="p-5">
+          <h3 className="text-xl font-bold text-white group-hover:text-primary-400 transition-colors mb-2">
+            {project.title}
+          </h3>
+          <p className="text-gray-400 mb-3 line-clamp-2 text-sm">
+            {project.description}
+          </p>
 
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.slice(0, 3).map((tech, index) => (
-            <span
-              key={index}
-              className={`px-2 py-1 rounded-lg text-xs font-medium border ${getTechColor(tech.color)}`}
-            >
-              {tech.name}
-            </span>
-          ))}
-          {project.technologies.length > 3 && (
-            <span className="px-2 py-1 rounded-lg text-xs font-medium bg-gray-500/20 text-gray-400">
-              +{project.technologies.length - 3}
-            </span>
-          )}
+          {/* Technologies */}
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.slice(0, 3).map((tech, index) => (
+              <span
+                key={index}
+                className={`px-2 py-1 rounded-lg text-xs font-medium border ${getTechColor(tech.color)}`}
+              >
+                {tech.name}
+              </span>
+            ))}
+            {project.technologies.length > 3 && (
+              <span className="px-2 py-1 rounded-lg text-xs font-medium bg-gray-500/20 text-gray-400">
+                +{project.technologies.length - 3}
+              </span>
+            )}
+          </div>
         </div>
-      </div>
-    </motion.div>
-  );
+      </motion.div>
+    );
+  };
 
   return (
     <section id="projects" className="py-20 px-4 relative overflow-hidden">
