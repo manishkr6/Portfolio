@@ -43,17 +43,17 @@ export const journeyData = [
   },
   {
     id: 4,
-    type: "internship",
+    type: "work",
     title: "InfoSec Solutions Developer",
     organization: "SH1ELD Tech InfoSec Solutions",
-    duration: "January 2026 - March 2026",
-    description: "Worked on developing security solutions and implementing best practices for information security in web applications.",
+    duration: "January 2026 - Present",
+    description: "Developing security solutions and implementing best practices for information security in web applications.",
     status: "Ongoing",
     icon: "work",
     details: [
-      "Developed security-focused web applications",
-      "Implemented authentication and authorization systems",
-      "Worked with security protocols and best practices"
+      "Developing security-focused web applications",
+      "Implementing authentication and authorization systems",
+      "Working with security protocols and best practices"
     ],
     technologies: [
       { name: "React", color: "cyan" },

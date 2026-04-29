@@ -45,10 +45,10 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]);
+  }, [location.pathname, navItems]); // Added navItems to dependency array for safety
 
   const scrollToSection = (id) => {
-    // Close menu first
+    // Close mobile menu first
     setIsOpen(false);
 
     if (location.pathname !== "/") {
@@ -57,30 +57,20 @@ const Navbar = () => {
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          const navbar = document.querySelector("nav");
-          const navbarHeight = navbar ? navbar.offsetHeight : 80;
-          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: elementPosition - navbarHeight - 20,
-            behavior: "smooth",
-          });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }, 300);
       return;
     }
 
-    const element = document.getElementById(id);
-    if (element) {
-      const navbar = document.querySelector("nav");
-      const navbarHeight = navbar ? navbar.offsetHeight : 80;
-      const offset = navbarHeight + 20;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-
-      window.scrollTo({
-        top: elementPosition - offset,
-        behavior: "smooth",
-      });
-    }
+    // Delay the scroll slightly to allow the mobile menu's closing animation 
+    // to finish (0.2s). This prevents layout shifts from cancelling the scroll.
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 250); 
   };
 
   return (
@@ -165,7 +155,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden glass-effect border-t border-primary-500/20"
+            className="md:hidden glass-effect border-t border-primary-500/20 overflow-hidden"
             style={{ pointerEvents: "auto" }}
           >
             <div
@@ -178,7 +168,6 @@ const Navbar = () => {
                   href={`#${item.id}`}
                   onClick={(e) => {
                     e.preventDefault();
-                    e.stopPropagation();
                     scrollToSection(item.id);
                   }}
                   className={`block px-4 py-3 rounded-lg font-medium transition-all duration-300 cursor-pointer ${

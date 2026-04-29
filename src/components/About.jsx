@@ -13,12 +13,21 @@ const About = () => {
   ];
 
   const aboutText = {
-    intro:
-      "Hi, I'm Manish Kumar Baitha — an aspiring AI & Machine Learning Engineer, Data Science enthusiast, and passionate Web Developer. I enjoy turning ideas into intelligent, data-driven solutions and clean, user-friendly web applications.",
-    skills:
-      "My skillset includes Python, Pandas, NumPy, Matplotlib, Scikit-learn, TensorFlow, and SQL for AI, ML, and analytics, along with HTML, CSS, JavaScript, React, Node.js, Express.js, and MongoDB for web development. I love building predictive models, analyzing data, visualizing insights, and creating responsive, interactive web tools.",
-    personal:
-      "Outside of coding, you'll find me hiking in the hills, enjoying coffee while planning new ideas, or playing badminton. I believe in continuous learning and pushing boundaries to build meaningful, impactful projects.",
+    intro: (
+      <>
+        Hi, I'm Manish Kumar Baitha — an <span className="bg-blue-500/10 text-blue-300 px-1.5 py-0.5 rounded">MCA student specializing in AI & Data Science</span>, with a strong focus on <span className="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded">Machine Learning and Generative AI</span>. I am passionate about moving beyond traditional data analysis to build intelligent systems and innovative, AI-driven solutions.
+      </>
+    ),
+    skills: (
+      <>
+        My core expertise is rooted in <span className="bg-blue-500/10 text-blue-300 px-1.5 py-0.5 rounded">Data Science and ML</span>, utilizing <span className="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded">Python, Scikit-learn, XGBoost</span>, and advanced classification algorithms. I am actively exploring <span className="bg-primary-500/10 text-primary-300 px-1.5 py-0.5 rounded">Generative AI</span> to create smarter, context-aware applications. To bring these models to the real world, I leverage my <span className="bg-blue-500/10 text-blue-300 px-1.5 py-0.5 rounded">Full-Stack MERN background</span>—enabling me to build and deploy end-to-end, interactive AI tools, a capability I've applied during my time at <span className="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded">SH1ELD Tech InfoSec Solutions</span>.
+      </>
+    ),
+    personal: (
+      <>
+        Beyond training models, I proudly serve as the <span className="bg-primary-500/10 text-primary-300 px-1.5 py-0.5 rounded">Innovation Coordinator for the IIC</span> (Institution's Innovation Council) at The ICFAI University, Sikkim. I love fostering a culture of tech creativity and organizing impactful academic seminars. When I step away from the screen, you'll find me hiking, brainstorming new ideas over coffee, or playing badminton. I'm driven by continuous learning and building communities around emerging tech.
+      </>
+    )
   };
 
   const containerVariants = {
@@ -63,7 +72,7 @@ const About = () => {
           >
             <div className="relative w-64 sm:w-72 md:w-80 lg:w-96 rounded-2xl overflow-hidden border-2 border-primary-500/30 shadow-2xl shadow-black/40">
               <img
-                src={personalData.profileImage}
+                src={personalData.profileImage2}
                 alt="Manish Kumar Baitha"
                 className="w-full h-auto object-cover"
               />
@@ -135,7 +144,7 @@ const About = () => {
             </motion.div>
 
             {/* Download CV Button */}
-            
+
           </motion.div>
         </motion.div>
       </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiInstagram } from 'react-icons/fi';
 import { personalData } from '../data/personalData';
 
 const Contact = () => {
@@ -56,7 +56,7 @@ const Contact = () => {
   const socialLinks = [
     { icon: FiGithub, url: personalData.github, label: 'GitHub' },
     { icon: FiLinkedin, url: personalData.linkedin, label: 'LinkedIn' },
-    { icon: FiTwitter, url: personalData.twitter, label: 'Twitter' },
+    { icon: FiInstagram, url: personalData.instagram, label: 'Instagram' },
   ];
 
   return (

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiDownload, FiInstagram } from "react-icons/fi";
 import { HiLocationMarker } from "react-icons/hi";
+import { FaPython, FaLink } from "react-icons/fa";
+import { SiTensorflow, SiKeras } from "react-icons/si";
 import { personalData } from "../data/personalData";
 
 const Hero = () => {
@@ -39,7 +41,7 @@ const Hero = () => {
 
       // Speed adjustments
       if (!shouldDelete && currentText === currentProfession) {
-        setTypingSpeed(1500); // Pause at end of word
+        setTypingSpeed(2500); // Pause at end of word
         setIsDeleting(true);
       } else if (shouldDelete && currentText === "") {
         setIsDeleting(false);
@@ -185,6 +187,43 @@ const Hero = () => {
             <div className="relative w-64 sm:w-72 md:w-80 lg:w-96 mx-auto">
               {/* Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-purple-500 rounded-full blur-2xl opacity-30 animate-pulse" />
+
+              {/* Floating Icons */}
+              <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -left-4 sm:top-4 sm:-left-6 w-12 h-12 sm:w-16 sm:h-16 glass-effect rounded-full flex items-center justify-center z-20 text-orange-400 border border-orange-500/30"
+                title="TensorFlow"
+              >
+                <SiTensorflow size={24} className="sm:w-8 sm:h-8" />
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 15, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute top-1/4 -right-6 sm:-right-8 w-10 h-10 sm:w-14 sm:h-14 glass-effect rounded-full flex items-center justify-center z-20 text-red-500 border border-red-500/30"
+                title="Keras"
+              >
+                <SiKeras size={20} className="sm:w-6 sm:h-6" />
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                className="absolute bottom-10 -left-8 sm:bottom-12 sm:-left-10 w-10 h-10 sm:w-14 sm:h-14 glass-effect rounded-full flex items-center justify-center z-20 text-blue-400 border border-blue-500/30"
+                title="Python"
+              >
+                <FaPython size={20} className="sm:w-6 sm:h-6" />
+              </motion.div>
+              
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                className="absolute -bottom-4 right-4 sm:-bottom-6 sm:right-8 w-12 h-12 sm:w-16 sm:h-16 glass-effect rounded-full flex items-center justify-center z-20 text-green-500 border border-green-500/30"
+                title="LangChain"
+              >
+                <FaLink size={24} className="sm:w-8 sm:h-8" />
+              </motion.div>
 
               {/* Image Container */}
               <div className="relative glass-effect rounded-full p-2 sm:p-3 animate-float">

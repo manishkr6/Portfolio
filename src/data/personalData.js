@@ -3,7 +3,7 @@ export const personalData = {
   title: "AI/ML Engineer & MERN Stack Developer",
   description: "Specializing in Data Science, Deep Learning, and NLP. Building intelligent solutions and scalable web applications with the MERN stack.",
   tagline: "Building the future, one line of code at a time",
-  email: "manishkr9547@gmail.com",
+  email: "manishkr8927@gmail.com",
   phone: "+91 8927436941",
   location: "Gangtok, Sikkim, India",
   github: "https://github.com/manishkr6",
@@ -11,4 +11,5 @@ export const personalData = {
   instagram: "https://www.instagram.com/see_codes/",
   resume: "#",
   profileImage: "https://ik.imagekit.io/manishkr5487/My-Photo/manish%20profile.png",
+  profileImage2: "https://ik.imagekit.io/manishkr5487/My-Photo/IMG_20250822_191116_533.webp?updatedAt=1770782765422",
 };

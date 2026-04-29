@@ -55,7 +55,7 @@ export const certificatesData = [
     category: "data-analytics",
     description: "Virtual job simulation focused on GenAI-powered analytics.",
     image:
-      "https://ik.imagekit.io/manishkr5487/certificate/WhatsApp%20Image%202025-08-23%20at%2011.44.43_a3759916.jpg?updatedAt=1756032982167",
+      "https://ik.imagekit.io/manishkr5487/certificate/Tata%20IQ.png?updatedAt=1765287107638",
     credentialId: "",
     skills: [
       "Python",
@@ -85,13 +85,13 @@ export const certificatesData = [
   {
     id: 6,
     title: "Web Development Bootcamp – Udemy",
-    issuer: "DataCamp",
+    issuer: "Udemy",
     date: "July 2024",
     category: "web-dev",
     description:
       "Completed a Web Development Bootcamp, learning to build responsive and full-stack web applications using modern technologies.",
     image:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop",
+      "https://ik.imagekit.io/manishkr5487/certificate/UC-6315a9ad-9049-43a5-8d35-8999e0c9ade8.jpg?updatedAt=1751978182550",
     credentialId: "",
     skills: ["HTML", "CSS", "JavaScript", "React", "Node.js"],
   },

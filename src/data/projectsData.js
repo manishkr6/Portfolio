@@ -23,7 +23,7 @@ export const projectsData = {
         "Advanced reporting dashboard",
       ],
       github: "https://github.com/manishkr6/govt-it-asset-management",
-      live: "https://github.com/manishkr6/govt-it-asset-management",
+      live: "",
       category: "Full Stack",
     },
     {
@@ -32,8 +32,7 @@ export const projectsData = {
       description:
         "A full-stack travel and hotel booking platform with Clerk authentication, allowing users to explore Sikkim districts, discover tourist places, and book hotels online.",
 
-      image:
-        "https://ik.imagekit.io/manishkr5487/My-Photo/Sikkim-LuxLodge.png",
+      image: "https://ik.imagekit.io/manishkr5487/My-Photo/Sikkim-LuxLodge.png",
 
       longDescription:
         "A modern MERN-based travel and hotel booking web application designed specifically for Sikkim tourism. Users can explore detailed travel pages for all four districts (East, West, North, and South Sikkim), view attractions and travel information, and book hotels based on availability. The platform includes secure authentication using Clerk, real-time room booking, booking history management, and an admin panel for managing hotels and listings. Built with a responsive UI to ensure smooth performance across devices.",
@@ -102,7 +101,7 @@ export const projectsData = {
         "Content-based movie recommender that suggests similar movies using cosine similarity and machine learning.",
 
       image:
-        "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&h=500&fit=crop",
+        "https://ik.imagekit.io/manishkr5487/My-Photo/movie-recommendation.png?updatedAt=1770898392661",
 
       longDescription:
         "A content-based movie recommendation system built with Python and Machine Learning that suggests movies based on similarity of genres, keywords, and features. Uses cosine similarity to compute recommendations and provides an interactive Streamlit interface where users can select a movie and instantly view related suggestions. Designed for fast performance and an intuitive user experience.",
@@ -126,6 +125,58 @@ export const projectsData = {
       live: "https://manishkr6-movie-recommendation-system-app-xzcclt.streamlit.app/",
       category: "Machine Learning",
     },
+     {
+      id: 3,
+      title: "ResearchMind AI (Multi-Agent AI Research System)",
+      description:
+        "An advanced multi-agent AI system that performs automated end-to-end research on any topic using specialized AI agents.",
+      image:
+        "https://ik.imagekit.io/manishkr5487/My-Photo/ReasearchMindAI.png",
+      longDescription:
+        "ResearchMind AI is a multi-agent research automation system that takes a user query and generates a complete structured research report. It uses multiple AI agents working together: Search Agent for web data collection, Reader Agent for extracting relevant content, Writer Agent for structured report generation, and Critic Agent for improving output quality. Built with Streamlit and powered by LLMs like Mistral AI, LangChain, and Tavily API.",
+      technologies: [
+        { name: "Python", color: "blue" },
+        { name: "Streamlit", color: "red" },
+        { name: "LangChain", color: "purple" },
+        { name: "Mistral AI", color: "orange" },
+        { name: "Tavily API", color: "green" },
+      ],
+      features: [
+        "Multi-agent workflow system",
+        "Automated research report generation",
+        "Real-time web information extraction",
+        "AI-driven report refinement (Critic Agent)",
+      ],
+      github: "https://github.com/manishkr6/Multi-Agent-AI",
+      live: "https://multi-agent-sys.streamlit.app/",
+      category: "Gen AI",
+    },
+    {
+  id: 4,
+  title: "DocMind RAG (Document Intelligence System)",
+  description:
+    "A Retrieval-Augmented Generation (RAG) based AI system that allows users to chat with documents and extract precise answers instantly.",
+  image:
+    "https://ik.imagekit.io/manishkr5487/My-Photo/docmind.png",
+  longDescription:
+    "DocMind RAG is an AI-powered document intelligence system that enables users to upload documents and interact with them using natural language. It uses Retrieval-Augmented Generation (RAG) to fetch relevant chunks from documents and generate accurate, context-aware responses. The system is designed for research papers, PDFs, notes, and knowledge base querying.",
+  technologies: [
+    { name: "Python", color: "blue" },
+    { name: "LangChain", color: "purple" },
+    { name: "Vector DB", color: "green" },
+    { name: "LLMs (Mistral)", color: "orange" },
+    { name: "Streamlit", color: "red" }
+  ],
+  features: [
+    "Document Q&A using RAG architecture",
+    "Semantic search over uploaded files",
+    "Context-aware AI responses",
+    "Fast retrieval using vector embeddings"
+  ],
+  github: "https://github.com/manishkr6/docmind-rag",
+  live: "https://docmind-rag.streamlit.app",
+  category: "Gen AI",
+}
   ],
 };
 
@@ -174,4 +225,5 @@ export const projectCategories = {
       "OpenCV",
     ],
   },
+  
 };
