@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiDownload, FiInstagram } from "react-icons/fi";
 import { HiLocationMarker } from "react-icons/hi";
 import { FaPython, FaLink } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
 import { SiTensorflow, SiKeras } from "react-icons/si";
 import { personalData } from "../data/personalData";
 
@@ -146,10 +147,12 @@ const Hero = () => {
             >
               <a
                 href={personalData.resume}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-5 sm:px-6 py-2.5 sm:py-3 bg-primary-500 text-dark-500 rounded-lg font-semibold hover:bg-primary-400 transition-all duration-300 flex items-center gap-2 hover-glow group text-sm sm:text-base"
               >
-                <FiDownload className="group-hover:animate-bounce" size={18} />
-                Download Resume
+                <FiExternalLink className="group-hover:translate-x-1 transition-transform" size={18} />
+                View Resume
               </a>
               <a
                 href="#contact"

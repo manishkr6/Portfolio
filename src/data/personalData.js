@@ -1,6 +1,6 @@
 export const personalData = {
   name: "Manish Kumar Baitha",
-  title: "AI/ML Engineer & MERN Stack Developer",
+  title: "AI/ML Engineer & Full Stack Developer",
   description: "Specializing in Data Science, Deep Learning, and NLP. Building intelligent solutions and scalable web applications with the MERN stack.",
   tagline: "Building the future, one line of code at a time",
   email: "manishkr8927@gmail.com",
@@ -9,7 +9,7 @@ export const personalData = {
   github: "https://github.com/manishkr6",
   linkedin: "https://www.linkedin.com/in/manish-kumar-599138318/",
   instagram: "https://www.instagram.com/see_codes/",
-  resume: "#",
-  profileImage: "https://ik.imagekit.io/manishkr5487/My-Photo/manish%20profile.png",
+  resume: "https://ik.imagekit.io/manishkr5487/My-Photo/Manish_Kumar.pdf",
+  profileImage: "https://ik.imagekit.io/manishkr5487/My-Photo/manish%20profile.png?updatedAt=1770699074406",
   profileImage2: "https://ik.imagekit.io/manishkr5487/My-Photo/IMG_20250822_191116_533.webp?updatedAt=1770782765422",
 };
