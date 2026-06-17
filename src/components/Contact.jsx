@@ -1,62 +1,105 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiInstagram } from 'react-icons/fi';
-import { personalData } from '../data/personalData';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiSend,
+  FiGithub,
+  FiLinkedin,
+  FiTwitter,
+  FiInstagram,
+} from "react-icons/fi";
+import { personalData } from "../data/personalData";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState({ type: null, text: "" });
+  const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    alert('Message sent successfully! I will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          from_name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage({
+          type: "success",
+          text: "Message sent successfully! I will get back to you soon.",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setSubmitMessage({
+          type: "error",
+          text: "Error sending message. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setSubmitMessage({
+        type: "error",
+        text: "Error sending message. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: FiMail,
-      label: 'Email',
+      label: "Email",
       value: personalData.email,
-      href: `mailto:${personalData.email}`
+      href: `mailto:${personalData.email}`,
     },
     {
       icon: FiPhone,
-      label: 'Phone',
+      label: "Phone",
       value: personalData.phone,
-      href: `tel:${personalData.phone}`
+      href: `tel:${personalData.phone}`,
     },
     {
       icon: FiMapPin,
-      label: 'Location',
+      label: "Location",
       value: personalData.location,
-      href: '#'
-    }
+      href: "#",
+    },
   ];
 
   const socialLinks = [
-    { icon: FiGithub, url: personalData.github, label: 'GitHub' },
-    { icon: FiLinkedin, url: personalData.linkedin, label: 'LinkedIn' },
-    { icon: FiInstagram, url: personalData.instagram, label: 'Instagram' },
+    { icon: FiGithub, url: personalData.github, label: "GitHub" },
+    { icon: FiLinkedin, url: personalData.linkedin, label: "LinkedIn" },
+    { icon: FiInstagram, url: personalData.instagram, label: "Instagram" },
   ];
 
   return (
@@ -78,7 +121,8 @@ const Contact = () => {
             Get In Touch
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? Feel free to reach out!
+            Have a project in mind or want to collaborate? Feel free to reach
+            out!
           </p>
         </motion.div>
 
@@ -138,10 +182,13 @@ const Contact = () => {
             <div className="p-6 glass-effect rounded-xl">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-white font-semibold">Available for Work</span>
+                <span className="text-white font-semibold">
+                  Available for Work
+                </span>
               </div>
               <p className="text-gray-400 text-sm">
-                I'm currently open to new opportunities and exciting projects. Let's create something amazing together!
+                I'm currently open to new opportunities and exciting projects.
+                Let's create something amazing together!
               </p>
             </div>
           </motion.div>
@@ -153,41 +200,57 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="glass-effect rounded-xl p-8 space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors"
-                  placeholder="John Doe"
-                />
+            <form
+              onSubmit={handleSubmit}
+              className="glass-effect rounded-xl p-8 space-y-6"
+            >
+              {/* Name and Email - Side by Side */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-400 mb-2"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors"
+                    placeholder="John Doe"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-400 mb-2"
+                  >
+                    Your Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors"
+                    placeholder="john@example.com"
+                  />
+                </div>
               </div>
 
+              {/* Subject - Full Width */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors"
-                  placeholder="john@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-2">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-gray-400 mb-2"
+                >
                   Subject
                 </label>
                 <input
@@ -202,8 +265,12 @@ const Contact = () => {
                 />
               </div>
 
+              {/* Message - Full Width and Spacious */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-400 mb-2"
+                >
                   Message
                 </label>
                 <textarea
@@ -212,11 +279,23 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={5}
+                  rows={6}
                   className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>
+
+              {submitMessage.type && (
+                <div
+                  className={`rounded-xl px-4 py-3 text-sm font-medium ${
+                    submitMessage.type === "success"
+                      ? "bg-green-500/10 border border-green-400 text-green-200"
+                      : "bg-red-500/10 border border-red-400 text-red-200"
+                  }`}
+                >
+                  {submitMessage.text}
+                </div>
+              )}
 
               <button
                 type="submit"
