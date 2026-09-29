@@ -1,320 +1,237 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiSend,
-  FiGithub,
-  FiLinkedin,
-  FiTwitter,
-  FiInstagram,
-} from "react-icons/fi";
-import { personalData } from "../data/personalData";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, MapPin, GitFork, Link, Share2, Send, CheckCircle } from 'lucide-react';
+import SectionHeading from './SectionHeading';
+import { personalData } from '../data/personalData';
+
+const SOCIALS = [
+  { icon: GitFork, label: 'GitHub', href: personalData.github, color: '#aaaaaa' },
+  { icon: Link, label: 'LinkedIn', href: personalData.linkedin, color: '#0ea5e9' },
+  { icon: Share2, label: 'Instagram', href: personalData.instagram, color: '#ec4899' },
+  { icon: Mail, label: 'Email', href: `mailto:${personalData.email}`, color: '#06b6d4' },
+];
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState({ type: null, text: "" });
-  const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
+    setLoading(true);
+    // Web3Forms integration
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: accessKey,
-          from_name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
+          access_key: 'YOUR_WEB3FORMS_KEY', // Replace with actual key
+          ...form,
+          to_email: personalData.email,
         }),
       });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSubmitMessage({
-          type: "success",
-          text: "Message sent successfully! I will get back to you soon.",
-        });
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setSubmitMessage({
-          type: "error",
-          text: "Error sending message. Please try again.",
-        });
+      if (res.ok) {
+        setSent(true);
+        setForm({ name: '', email: '', subject: '', message: '' });
       }
-    } catch (error) {
-      console.error("Error:", error);
-      setSubmitMessage({
-        type: "error",
-        text: "Error sending message. Please try again.",
-      });
-    } finally {
-      setIsSubmitting(false);
+    } catch {
+      // Fallback: open mailto
+      window.location.href = `mailto:${personalData.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(form.message)}`;
     }
+    setLoading(false);
   };
 
-  const contactInfo = [
-    {
-      icon: FiMail,
-      label: "Email",
-      value: personalData.email,
-      href: `mailto:${personalData.email}`,
-    },
-    {
-      icon: FiPhone,
-      label: "Phone",
-      value: personalData.phone,
-      href: `tel:${personalData.phone}`,
-    },
-    {
-      icon: FiMapPin,
-      label: "Location",
-      value: personalData.location,
-      href: "#",
-    },
-  ];
-
-  const socialLinks = [
-    { icon: FiGithub, url: personalData.github, label: "GitHub" },
-    { icon: FiLinkedin, url: personalData.linkedin, label: "LinkedIn" },
-    { icon: FiInstagram, url: personalData.instagram, label: "Instagram" },
-  ];
-
   return (
-    <section id="contact" className="py-20 px-4 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-3xl" />
+    <section id="contact" className="py-24 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ai-cyan/3 to-transparent pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gradient mb-4">
-            Get In Touch
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? Feel free to reach
-            out!
-          </p>
-        </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="// get in touch"
+          title="Contact Me"
+          subtitle="Open to internships, collaborations, and exciting AI/ML projects."
+        />
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+        <div className="grid md:grid-cols-2 gap-10">
+          {/* LEFT — contact info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            className="flex flex-col gap-6"
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-8"
           >
-            <div>
-              <h3 className="text-2xl font-display font-bold text-white mb-6">
-                Contact Information
-              </h3>
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => (
-                  <motion.a
-                    key={index}
-                    href={info.href}
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-4 p-4 glass-effect rounded-xl hover:border-primary-400 transition-all duration-300 group"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-primary-500/20 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors">
-                      <info.icon className="text-primary-400" size={20} />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">{info.label}</p>
-                      <p className="text-white font-medium">{info.value}</p>
-                    </div>
-                  </motion.a>
-                ))}
+            <div className="glass rounded-2xl p-8 border border-dark-border">
+              <h3 className="text-xl font-bold text-white mb-6">Let's Build Something Together</h3>
+
+              <div className="flex flex-col gap-5">
+                <div className="flex items-center gap-4">
+                  <div className="p-2.5 rounded-lg bg-ai-cyan/10 border border-ai-cyan/20">
+                    <Mail className="w-5 h-5 text-ai-cyan" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 font-mono">Email</p>
+                    <a href={`mailto:${personalData.email}`} className="text-slate-300 hover:text-ai-cyan transition-colors text-sm">
+                      {personalData.email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="p-2.5 rounded-lg bg-ai-purple/10 border border-ai-purple/20">
+                    <MapPin className="w-5 h-5 text-ai-purple" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 font-mono">Location</p>
+                    <p className="text-slate-300 text-sm">{personalData.location}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social links */}
+              <div className="mt-8">
+                <p className="text-xs text-slate-500 font-mono mb-4 tracking-widest">FIND ME ON</p>
+                <div className="flex gap-4">
+                  {SOCIALS.map(social => {
+                    const Icon = social.icon;
+                    return (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={social.label}
+                        className="p-3 rounded-xl glass border border-dark-border hover:border-ai-cyan/40 transition-all duration-200"
+                        style={{ '--hover-color': social.color }}
+                      >
+                        <Icon
+                          className="w-5 h-5 text-slate-400 hover:text-white transition-colors"
+                          style={{ color: 'inherit' }}
+                        />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            {/* Social Links */}
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">Follow Me</h3>
-              <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-14 h-14 rounded-full glass-effect flex items-center justify-center text-gray-400 hover:text-primary-400 hover:border-primary-400 transition-all duration-300"
-                  >
-                    <social.icon size={24} />
-                  </motion.a>
-                ))}
+            {/* Availability badge */}
+            <div className="glass rounded-xl p-5 border border-ai-emerald/30 bg-ai-emerald/5">
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-ai-emerald animate-pulse" />
+                <div>
+                  <p className="text-ai-emerald text-sm font-medium">Available for Opportunities</p>
+                  <p className="text-slate-400 text-xs mt-0.5">Internships · Freelance · Full-time</p>
+                </div>
               </div>
-            </div>
-
-            {/* Availability */}
-            <div className="p-6 glass-effect rounded-xl">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-white font-semibold">
-                  Available for Work
-                </span>
-              </div>
-              <p className="text-gray-400 text-sm">
-                I'm currently open to new opportunities and exciting projects.
-                Let's create something amazing together!
-              </p>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* RIGHT — contact form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <form
-              onSubmit={handleSubmit}
-              className="glass-effect rounded-xl p-8 space-y-6"
-            >
-              {/* Name and Email - Side by Side */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-400 mb-2"
+            <div className="glass rounded-2xl p-8 border border-dark-border">
+              {sent ? (
+                <div className="flex flex-col items-center justify-center gap-4 py-12">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring' }}
                   >
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors"
-                    placeholder="John Doe"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-400 mb-2"
+                    <CheckCircle className="w-16 h-16 text-ai-emerald" />
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-white">Message Sent!</h3>
+                  <p className="text-slate-400 text-center">I'll get back to you as soon as possible.</p>
+                  <button
+                    onClick={() => setSent(false)}
+                    className="text-ai-cyan text-sm hover:underline"
                   >
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors"
-                    placeholder="john@example.com"
-                  />
+                    Send another message
+                  </button>
                 </div>
-              </div>
-
-              {/* Subject - Full Width */}
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors"
-                  placeholder="Project Inquiry"
-                />
-              </div>
-
-              {/* Message - Full Width and Spacious */}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 bg-dark-400/50 border border-gray-700 rounded-lg focus:outline-none focus:border-primary-400 text-white transition-colors resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-
-              {submitMessage.type && (
-                <div
-                  className={`rounded-xl px-4 py-3 text-sm font-medium ${
-                    submitMessage.type === "success"
-                      ? "bg-green-500/10 border border-green-400 text-green-200"
-                      : "bg-red-500/10 border border-red-400 text-red-200"
-                  }`}
-                >
-                  {submitMessage.text}
-                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-mono text-slate-500 mb-1.5 block">Name</label>
+                      <input
+                        name="name"
+                        value={form.name}
+                        onChange={handleChange}
+                        required
+                        placeholder="Your name"
+                        className="w-full bg-dark-base/50 border border-dark-border rounded-lg px-4 py-3 text-sm text-slate-300
+                                   placeholder-slate-600 focus:outline-none focus:border-ai-cyan/60 focus:shadow-[0_0_10px_rgba(6,182,212,0.2)]
+                                   transition-all duration-200"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-mono text-slate-500 mb-1.5 block">Email</label>
+                      <input
+                        name="email"
+                        type="email"
+                        value={form.email}
+                        onChange={handleChange}
+                        required
+                        placeholder="your@email.com"
+                        className="w-full bg-dark-base/50 border border-dark-border rounded-lg px-4 py-3 text-sm text-slate-300
+                                   placeholder-slate-600 focus:outline-none focus:border-ai-cyan/60 focus:shadow-[0_0_10px_rgba(6,182,212,0.2)]
+                                   transition-all duration-200"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs font-mono text-slate-500 mb-1.5 block">Subject</label>
+                    <input
+                      name="subject"
+                      value={form.subject}
+                      onChange={handleChange}
+                      required
+                      placeholder="What's this about?"
+                      className="w-full bg-dark-base/50 border border-dark-border rounded-lg px-4 py-3 text-sm text-slate-300
+                                 placeholder-slate-600 focus:outline-none focus:border-ai-cyan/60 focus:shadow-[0_0_10px_rgba(6,182,212,0.2)]
+                                 transition-all duration-200"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-mono text-slate-500 mb-1.5 block">Message</label>
+                    <textarea
+                      name="message"
+                      value={form.message}
+                      onChange={handleChange}
+                      required
+                      rows={5}
+                      placeholder="Tell me about your project or opportunity..."
+                      className="w-full bg-dark-base/50 border border-dark-border rounded-lg px-4 py-3 text-sm text-slate-300
+                                 placeholder-slate-600 focus:outline-none focus:border-ai-cyan/60 focus:shadow-[0_0_10px_rgba(6,182,212,0.2)]
+                                 transition-all duration-200 resize-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-ai-cyan text-dark-base font-semibold
+                               hover:bg-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200
+                               shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_35px_rgba(6,182,212,0.5)]"
+                  >
+                    {loading ? (
+                      <div className="w-5 h-5 border-2 border-dark-base/30 border-t-dark-base rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </form>
               )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-6 py-4 bg-primary-500 text-dark-500 rounded-lg font-semibold hover:bg-primary-400 transition-all duration-300 hover-glow flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-dark-500 border-t-transparent rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <FiSend />
-                    Send Message
-                  </>
-                )}
-              </button>
-            </form>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -1,190 +1,153 @@
-import { useState, useEffect } from "react";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { motion, AnimatePresence } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Terminal } from 'lucide-react';
+import { personalData } from '../data/personalData';
+
+const NAV_LINKS = [
+  { label: 'Home', href: '/#home' },
+  { label: 'About', href: '/#about' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Journey', href: '/#journey' },
+  { label: 'Certificates', href: '/#certificates' },
+  { label: 'Contact', href: '/#contact' },
+];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const navItems = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "journey", label: "Journey" },
-    { id: "skills", label: "Skills" },
-    { id: "certificates", label: "Certificates" },
-    { id: "projects", label: "Projects" },
-    { id: "contact", label: "Contact" },
-  ];
+  const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-
-      if (location.pathname !== "/") return;
-
-      // Update active section based on scroll position
-      const sections = navItems.map((item) => document.getElementById(item.id));
-      const navbar = document.querySelector("nav");
-      const navbarHeight = navbar ? navbar.offsetHeight : 80;
-      const scrollPosition = window.scrollY + navbarHeight + 50;
-
-      sections.forEach((section, index) => {
-        if (section) {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(navItems[index].id);
-          }
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      // Track active section
+      const sections = ['home','about','skills','projects','journey','certificates','contact'];
+      for (const s of sections.reverse()) {
+        const el = document.getElementById(s);
+        if (el && window.scrollY >= el.offsetTop - 100) {
+          setActiveSection(s);
+          break;
         }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname, navItems]); // Added navItems to dependency array for safety
-
-  const scrollToSection = (id) => {
-    // Close mobile menu first
-    setIsOpen(false);
-
-    if (location.pathname !== "/") {
-      navigate("/");
-      // Wait for navigation and mount before scrolling
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 300);
-      return;
-    }
-
-    // Delay the scroll slightly to allow the mobile menu's closing animation 
-    // to finish (0.2s). This prevents layout shifts from cancelling the scroll.
-    setTimeout(() => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
       }
-    }, 250); 
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollTo = (href) => {
+    setOpen(false);
+    if (href.startsWith('/#')) {
+      const id = href.replace('/#', '');
+      if (pathname !== '/') {
+        window.location.href = href;
+      } else {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-effect shadow-lg" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    <>
+      <motion.nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? 'glass shadow-lg shadow-black/30' : 'bg-transparent'
+        }`}
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex-shrink-0"
-          >
-            <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("home");
-              }}
-              className="text-2xl font-display font-bold text-gradient"
-            >
-              &lt;MKB /&gt;
-            </a>
-          </motion.div>
+          <Link to="/" className="flex items-center gap-2 group">
+            <Terminal className="w-5 h-5 text-ai-cyan" />
+            <span className="font-mono text-lg font-semibold text-white group-hover:text-ai-cyan transition-colors">
+              manish<span className="text-ai-cyan">.dev</span>
+            </span>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                href={`#${item.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.id);
-                }}
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 relative group ${
-                  activeSection === item.id
-                    ? "text-primary-400"
-                    : "text-gray-300 hover:text-primary-400"
-                }`}
-              >
-                {item.label}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-400"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-                <span className="absolute inset-0 rounded-lg bg-primary-500/0 group-hover:bg-primary-500/10 transition-colors duration-300" />
-              </motion.a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-primary-400 transition-colors p-2"
-            >
-              {isOpen ? <HiX size={28} /> : <HiMenuAlt3 size={28} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden glass-effect border-t border-primary-500/20 overflow-hidden"
-            style={{ pointerEvents: "auto" }}
-          >
-            <div
-              className="px-4 py-4 space-y-2"
-              style={{ pointerEvents: "auto" }}
-            >
-              {navItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.id);
-                  }}
-                  className={`block px-4 py-3 rounded-lg font-medium transition-all duration-300 cursor-pointer ${
-                    activeSection === item.id
-                      ? "bg-primary-500/20 text-primary-400 border-l-4 border-primary-400"
-                      : "text-gray-300 hover:bg-primary-500/10 hover:text-primary-400"
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map(link => {
+              const id = link.href.replace('/#','');
+              const isActive = activeSection === id && pathname === '/';
+              return (
+                <button
+                  key={link.label}
+                  onClick={() => scrollTo(link.href)}
+                  className={`relative px-3 py-1.5 text-sm font-medium transition-colors ${
+                    isActive ? 'text-ai-cyan' : 'text-slate-400 hover:text-white'
                   }`}
-                  style={{ pointerEvents: "auto" }}
                 >
-                  {item.label}
-                </a>
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-underline"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-ai-cyan rounded-full"
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Hire Me button */}
+          <div className="hidden md:block">
+            <a
+              href={`mailto:${personalData.email}`}
+              className="px-4 py-2 rounded-full border border-ai-cyan text-ai-cyan text-sm font-medium
+                         hover:bg-ai-cyan hover:text-dark-base transition-all duration-200
+                         shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)]"
+            >
+              Hire Me
+            </a>
+          </div>
+
+          {/* Mobile burger */}
+          <button
+            className="md:hidden text-slate-400 hover:text-white"
+            onClick={() => setOpen(v => !v)}
+          >
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="fixed inset-0 z-40 glass pt-16"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="flex flex-col items-center justify-center gap-6 h-full pb-20">
+              {NAV_LINKS.map(link => (
+                <button
+                  key={link.label}
+                  onClick={() => scrollTo(link.href)}
+                  className="text-2xl font-medium text-slate-300 hover:text-ai-cyan transition-colors"
+                >
+                  {link.label}
+                </button>
               ))}
+              <a
+                href={`mailto:${personalData.email}`}
+                className="mt-4 px-8 py-3 rounded-full border border-ai-cyan text-ai-cyan font-medium
+                           hover:bg-ai-cyan hover:text-dark-base transition-all"
+                onClick={() => setOpen(false)}
+              >
+                Hire Me
+              </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };
 

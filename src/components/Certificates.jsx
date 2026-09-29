@@ -1,141 +1,148 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import {
-  FiX,
-  FiAward,
-  FiCalendar,
-  FiExternalLink,
-  FiArrowLeft,
-  FiArrowRight,
-  FiDownload,
-  FiBookOpen,
-} from "react-icons/fi";
-import {
-  certificatesData,
-  certificateCategories,
-} from "../data/certificatesData";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Award, Calendar } from 'lucide-react';
+import SectionHeading from './SectionHeading';
+import { certificatesData, certificateCategories } from '../data/certificatesData';
 
-const Certificates = () => {
-  const navigate = useNavigate();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { y: 40, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5 },
-    },
-  };
+const CertCard = ({ cert, index }) => {
+  const [flipped, setFlipped] = useState(false);
 
   return (
-    <section
-      id="certificates"
-      className="py-16 px-4 sm:py-20 md:py-24 relative overflow-hidden"
+    <motion.div
+      className="relative h-64 cursor-pointer"
+      style={{ perspective: 1000 }}
+      onClick={() => setFlipped(v => !v)}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08 }}
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
-      <div className="absolute -bottom-20 left-0 right-0 h-96 bg-gradient-to-t from-purple-900/10 to-transparent blur-3xl" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
+      <motion.div
+        className="relative w-full h-full"
+        style={{ transformStyle: 'preserve-3d' }}
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+      >
+        {/* FRONT */}
+        <div
+          className="absolute inset-0 rounded-xl overflow-hidden border border-dark-border glass"
+          style={{ backfaceVisibility: 'hidden' }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gradient mb-3 sm:mb-4">
-            Certificates & Achievements
-          </h2>
-          <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto px-2">
-            Professional certifications and courses I've completed
-          </p>
-        </motion.div>
+          <img
+            src={cert.image}
+            alt={cert.title}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-base via-dark-base/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-4">
+            <p className="text-white text-sm font-semibold line-clamp-2">{cert.title}</p>
+            <p className="text-ai-cyan text-xs mt-1">{cert.issuer}</p>
+          </div>
+          <div className="absolute top-3 right-3 text-xs text-slate-400 bg-dark-base/70 px-2 py-0.5 rounded-full font-mono">
+            click to flip
+          </div>
+        </div>
 
-        {/* Certificates Grid - Initial 3 cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        {/* BACK */}
+        <div
+          className="absolute inset-0 rounded-xl glass border border-ai-cyan/30 p-5 flex flex-col justify-between"
+          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
-          <AnimatePresence mode="popLayout">
-            {certificatesData.slice(0, 3).map((cert) => (
-              <motion.div
-                key={cert.id}
-                variants={cardVariants}
-                layout
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                onClick={() => navigate(`/certificate/${cert.id}`)}
-                className="glass-effect rounded-xl overflow-hidden cursor-pointer group border border-gray-800/40 hover:border-primary-500/40 transition-all duration-300"
-              >
-                {/* Certificate Image */}
-                <div className="relative aspect-[4/3] sm:aspect-[3/2] overflow-hidden">
-                  <img
-                    src={cert.image}
-                    alt={cert.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-primary-600/30 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <FiAward className="text-primary-400" size={20} />
-                  </div>
-                </div>
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <Award className="w-4 h-4 text-ai-cyan" />
+              <span className="text-xs font-mono text-ai-cyan uppercase tracking-widest">Certificate</span>
+            </div>
+            <h3 className="text-sm font-bold text-white mb-2 leading-snug">{cert.title}</h3>
+            <p className="text-xs text-slate-400 mb-2">{cert.description}</p>
+            <div className="flex items-center gap-1 text-xs text-slate-500">
+              <Calendar className="w-3 h-3" />
+              {cert.date}
+            </div>
+          </div>
 
-                {/* Certificate Info */}
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-primary-400 transition-colors mb-2 line-clamp-2">
-                    {cert.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 mb-3">
-                    <FiCalendar size={14} />
-                    <span>{cert.date}</span>
-                  </div>
-                  <p className="text-gray-400 text-sm sm:text-base line-clamp-2 mb-4">
-                    {cert.description}
-                  </p>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-primary-400 font-medium">
-                      {cert.issuer}
-                    </span>
-                    <FiExternalLink className="text-gray-400 group-hover:text-primary-400 transition-colors" />
-                  </div>
-                </div>
-              </motion.div>
+          {/* Skills */}
+          <div className="flex flex-wrap gap-1 mb-3">
+            {cert.skills?.slice(0, 4).map(s => (
+              <span key={s} className="text-xs px-2 py-0.5 rounded-md bg-ai-cyan/10 text-ai-cyan border border-ai-cyan/20 font-mono">
+                {s}
+              </span>
             ))}
-          </AnimatePresence>
-        </motion.div>
+          </div>
 
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-center mt-10 sm:mt-14"
-        >
-          <button
-            onClick={() => navigate("/certificates")}
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 hover:bg-primary-500 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary-500/30 text-sm sm:text-base"
+          {cert.credentialId ? (
+            <a
+              href={`https://www.credly.com/badges/${cert.credentialId}`}
+              target="_blank"
+              rel="noreferrer"
+              onClick={e => e.stopPropagation()}
+              className="flex items-center gap-1 text-xs text-ai-cyan hover:text-white transition-colors"
+            >
+              <ExternalLink className="w-3 h-3" />
+              View Credential
+            </a>
+          ) : (
+            <span className="text-xs text-slate-600 font-mono">Issued by {cert.issuer}</span>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const Certificates = () => {
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const filtered = activeCategory === 'all'
+    ? certificatesData
+    : certificatesData.filter(c => c.category === activeCategory);
+
+  return (
+    <section id="certificates" className="py-24 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ai-emerald/3 to-transparent pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="// achievements"
+          title="Certificates"
+          subtitle="Industry-recognized credentials across AI/ML, Data Science, and Web Development."
+        />
+
+        {/* Filter tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {certificateCategories.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 rounded-full text-sm transition-all ${
+                activeCategory === cat.id
+                  ? 'bg-ai-cyan text-dark-base font-semibold shadow-[0_0_20px_rgba(6,182,212,0.4)]'
+                  : 'glass border border-dark-border text-slate-400 hover:border-ai-cyan/40 hover:text-white'
+              }`}
+            >
+              {cat.name}
+              <span className="ml-1.5 text-xs opacity-60">({cat.count})</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Cards grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            View All Certificates
-            <span className="text-xs sm:text-sm opacity-80">
-              ({certificatesData.length})
-            </span>
-          </button>
-        </motion.div>
+            {filtered.map((cert, i) => (
+              <CertCard key={cert.id} cert={cert} index={i} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

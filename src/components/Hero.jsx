@@ -1,251 +1,247 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiDownload, FiInstagram } from "react-icons/fi";
-import { HiLocationMarker } from "react-icons/hi";
-import { FaPython, FaLink } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
-import { SiTensorflow, SiKeras } from "react-icons/si";
-import { personalData } from "../data/personalData";
+import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
+import { ArrowDown, GitFork, Link, Download, ExternalLink } from 'lucide-react';
+import ParticleBackground from './ParticleBackground';
+import { personalData } from '../data/personalData';
+
+const TECH_BADGES = ['Python', 'PyTorch', 'LangChain', 'React', 'FastAPI', 'ChromaDB'];
+
+// Orbit positions for tech badges around the avatar
+const ORBITS = [
+  { angle: 0,   delay: 0 },
+  { angle: 60,  delay: 0.5 },
+  { angle: 120, delay: 1 },
+  { angle: 180, delay: 1.5 },
+  { angle: 240, delay: 2 },
+  { angle: 300, delay: 2.5 },
+];
+
+const OrbitBadge = ({ label, angle, delay }) => {
+  const rad = (angle * Math.PI) / 180;
+  const r = 110;
+  const x = Math.cos(rad) * r;
+  const y = Math.sin(rad) * r;
+
+  return (
+    <motion.div
+      className="absolute text-xs font-mono px-2 py-1 rounded-full glass border border-ai-cyan/30 text-ai-cyan whitespace-nowrap"
+      style={{
+        left: `calc(50% + ${x}px)`,
+        top: `calc(50% + ${y}px)`,
+        transform: 'translate(-50%,-50%)',
+      }}
+      animate={{
+        y: [y, y - 6, y],
+        opacity: [0.7, 1, 0.7],
+      }}
+      transition={{
+        duration: 3 + delay * 0.3,
+        repeat: Infinity,
+        delay,
+        ease: 'easeInOut',
+      }}
+    >
+      {label}
+    </motion.div>
+  );
+};
 
 const Hero = () => {
-  const socialLinks = [
-    { icon: FiGithub, url: personalData.github, label: "GitHub" },
-    { icon: FiLinkedin, url: personalData.linkedin, label: "LinkedIn" },
-    { icon: FiInstagram, url: personalData.instagram, label: "Instagram" },
-    { icon: FiMail, url: `mailto:${personalData.email}`, label: "Email" },
-  ];
-
-  // Typing effect professions
-  const professions = [
-    "AI/ML Engineer",
-    "Data Scientist",
-    "Full Stack Developer",
-  ];
-
-  const [currentText, setCurrentText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(80);
-
-  // Typing animation logic
-  useEffect(() => {
-    const handleTyping = () => {
-      const currentProfession = professions[currentIndex];
-      const shouldDelete = isDeleting;
-
-      setCurrentText((prev) => {
-        if (shouldDelete) {
-          return prev.slice(0, prev.length - 1);
-        }
-        return currentProfession.slice(0, prev.length + 1);
-      });
-
-      // Speed adjustments
-      if (!shouldDelete && currentText === currentProfession) {
-        setTypingSpeed(2500); // Pause at end of word
-        setIsDeleting(true);
-      } else if (shouldDelete && currentText === "") {
-        setIsDeleting(false);
-        setCurrentIndex((prev) => (prev + 1) % professions.length);
-        setTypingSpeed(80);
-      } else {
-        setTypingSpeed(isDeleting ? 40 : 80);
-      }
-    };
-
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentIndex, typingSpeed]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5 },
-    },
+  const scrollToProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center pt-16 pb-12 md:pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden grid-bg"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 grid-pattern opacity-30" />
-      <div className="absolute top-10 sm:top-20 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-primary-500/10 rounded-full blur-3xl animate-float" />
-      <div
-        className="absolute bottom-10 sm:bottom-20 right-4 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/10 rounded-full blur-3xl animate-float"
-        style={{ animationDelay: "1s" }}
-      />
+      <ParticleBackground />
 
-      <div className="max-w-7xl mx-auto relative z-10 w-full">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col md:grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center md:items-center"
-        >
-          {/* Text Content */}
-          <div className="space-y-5 sm:space-y-6 md:space-y-8 text-center md:text-left w-full">
-            <motion.div variants={itemVariants}>
-              <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-                Welcome to my portfolio
-              </span>
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-br from-ai-purple/10 via-transparent to-ai-cyan/10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-dark-base via-transparent to-transparent pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-20 pb-10 w-full">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+
+          {/* LEFT — text content */}
+          <motion.div
+            className="flex flex-col gap-5"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            {/* Greeting */}
+            <motion.div
+              className="flex items-center gap-2 font-mono text-ai-cyan text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <span className="inline-block w-8 h-px bg-ai-cyan" />
+              <span>Hello, World! 👋</span>
             </motion.div>
 
+            {/* Name */}
             <motion.h1
-              variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
             >
-              Hi, I'm{" "}
-              <span className="text-gradient animate-gradient bg-gradient-to-r from-primary-400 via-purple-400 to-primary-500">
-                {personalData.name}
-              </span>
+              <span className="text-white">I'm </span>
+              <span className="glow-cyan text-ai-cyan">Manish</span>
+              <br />
+              <span className="text-white">Kumar Baitha</span>
             </motion.h1>
 
-            {/* Typing Effect Profession */}
-            <motion.div variants={itemVariants} className="min-h-[1.5em]">
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-400 font-medium flex items-center justify-center md:justify-start gap-2">
-                <span className="text-primary-400 font-semibold">→</span>
-                <span className="typing-text">
-                  {currentText}
-                  <span className="animate-pulse">|</span>
-                </span>
-              </p>
+            {/* Typewriter */}
+            <motion.div
+              className="text-xl sm:text-2xl font-semibold text-slate-300 h-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <TypeAnimation
+                sequence={[
+                  'AI/ML Engineer', 2000,
+                  'Data Scientist', 2000,
+                  'LLM App Developer', 2000,
+                  'Full-Stack Developer', 2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                className="text-ai-purple"
+              />
             </motion.div>
 
+            {/* Bio */}
             <motion.p
-              variants={itemVariants}
-              className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto md:mx-0"
+              className="text-slate-400 text-base md:text-lg leading-relaxed max-w-lg"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
             >
               {personalData.description}
             </motion.p>
 
+            {/* CTAs */}
             <motion.div
-              variants={itemVariants}
-              className="flex items-center justify-center md:justify-start gap-2 text-gray-400 text-sm sm:text-base"
+              className="flex flex-wrap gap-4 mt-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
             >
-              <HiLocationMarker className="text-primary-400" size={20} />
-              <span>{personalData.location}</span>
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4 pt-4 sm:pt-6"
-            >
+              <button
+                onClick={scrollToProjects}
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-ai-cyan text-dark-base font-semibold
+                           hover:bg-cyan-400 transition-all duration-200 shadow-[0_0_20px_rgba(6,182,212,0.4)]
+                           hover:shadow-[0_0_35px_rgba(6,182,212,0.6)]"
+              >
+                <ExternalLink className="w-4 h-4" />
+                View My Projects
+              </button>
               <a
                 href={personalData.resume}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 sm:px-6 py-2.5 sm:py-3 bg-primary-500 text-dark-500 rounded-lg font-semibold hover:bg-primary-400 transition-all duration-300 flex items-center gap-2 hover-glow group text-sm sm:text-base"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-6 py-3 rounded-lg border border-ai-cyan/60 text-ai-cyan font-semibold
+                           hover:border-ai-cyan hover:bg-ai-cyan/10 transition-all duration-200"
               >
-                <FiExternalLink className="group-hover:translate-x-1 transition-transform" size={18} />
-                View Resume
+                <Download className="w-4 h-4" />
+                Download Resume
+              </a>
+            </motion.div>
+
+            {/* Social */}
+            <motion.div
+              className="flex gap-4 mt-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <a
+                href={personalData.github}
+                target="_blank"
+                rel="noreferrer"
+                className="text-slate-500 hover:text-white transition-colors"
+              >
+                <GitFork className="w-5 h-5" />
               </a>
               <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="px-5 sm:px-6 py-2.5 sm:py-3 glass-effect rounded-lg font-semibold hover:border-primary-400 transition-all duration-300 text-sm sm:text-base"
+                href={personalData.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="text-slate-500 hover:text-ai-cyan transition-colors"
               >
-                Get in Touch
+                <Link className="w-5 h-5" />
               </a>
             </motion.div>
+          </motion.div>
 
-            <motion.div
-              variants={itemVariants}
-              className="flex justify-center md:justify-start gap-3 sm:gap-4 pt-4 sm:pt-6"
-            >
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-effect flex items-center justify-center text-gray-400 hover:text-primary-400 hover:border-primary-400 transition-all duration-300 hover-glow"
-                >
-                  <social.icon size={20} />
-                </a>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Profile Image */}
-          <motion.div variants={itemVariants} className="relative mt-8 md:mt-0">
-            <div className="relative w-64 sm:w-72 md:w-80 lg:w-96 mx-auto">
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-purple-500 rounded-full blur-2xl opacity-30 animate-pulse" />
-
-              {/* Floating Icons */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -left-4 sm:top-4 sm:-left-6 w-12 h-12 sm:w-16 sm:h-16 glass-effect rounded-full flex items-center justify-center z-20 text-orange-400 border border-orange-500/30"
-                title="TensorFlow"
+          {/* RIGHT — avatar with orbiting badges */}
+          <motion.div
+            className="relative flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
+          >
+            {/* Outer glow ring */}
+            <div className="relative w-64 h-64 md:w-72 md:h-72">
+              {/* Rotating gradient ring */}
+              <div
+                className="absolute inset-0 rounded-full animate-spin-slow"
+                style={{
+                  background: 'conic-gradient(from 0deg, #06b6d4, #7c3aed, #10b981, #06b6d4)',
+                  padding: '3px',
+                }}
               >
-                <SiTensorflow size={24} className="sm:w-8 sm:h-8" />
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-1/4 -right-6 sm:-right-8 w-10 h-10 sm:w-14 sm:h-14 glass-effect rounded-full flex items-center justify-center z-20 text-red-500 border border-red-500/30"
-                title="Keras"
-              >
-                <SiKeras size={20} className="sm:w-6 sm:h-6" />
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                className="absolute bottom-10 -left-8 sm:bottom-12 sm:-left-10 w-10 h-10 sm:w-14 sm:h-14 glass-effect rounded-full flex items-center justify-center z-20 text-blue-400 border border-blue-500/30"
-                title="Python"
-              >
-                <FaPython size={20} className="sm:w-6 sm:h-6" />
-              </motion.div>
-              
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                className="absolute -bottom-4 right-4 sm:-bottom-6 sm:right-8 w-12 h-12 sm:w-16 sm:h-16 glass-effect rounded-full flex items-center justify-center z-20 text-green-500 border border-green-500/30"
-                title="LangChain"
-              >
-                <FaLink size={24} className="sm:w-8 sm:h-8" />
-              </motion.div>
-
-              {/* Image Container */}
-              <div className="relative glass-effect rounded-full p-2 sm:p-3 animate-float">
-                <div className="relative rounded-full overflow-hidden aspect-square border-2 border-primary-500/20">
-                  <img
-                    src={personalData.profileImage}
-                    alt={personalData.name}
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-500/50 to-transparent" />
-                </div>
+                <div className="w-full h-full rounded-full bg-dark-base" />
               </div>
 
-              {/* Decorative Elements */}
-              <div className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 w-16 sm:w-24 h-16 sm:h-24 border-4 border-primary-500 rounded-full opacity-30" />
-              <div className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 w-20 sm:w-32 h-20 sm:h-32 border-4 border-purple-500 rounded-full opacity-20" />
+              {/* Avatar */}
+              <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-dark-card">
+                <img
+                  src={personalData.profileImage}
+                  alt={personalData.name}
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+
+              {/* Pulse rings */}
+              {[1, 2, 3].map(i => (
+                <motion.div
+                  key={i}
+                  className="absolute inset-0 rounded-full border border-ai-cyan/20"
+                  animate={{ scale: [1, 1.2 + i * 0.1], opacity: [0.3, 0] }}
+                  transition={{ duration: 2, delay: i * 0.5, repeat: Infinity }}
+                />
+              ))}
+
+              {/* Orbiting tech badges */}
+              {TECH_BADGES.map((badge, i) => (
+                <OrbitBadge
+                  key={badge}
+                  label={badge}
+                  angle={ORBITS[i].angle}
+                  delay={ORBITS[i].delay}
+                />
+              ))}
             </div>
           </motion.div>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <span className="text-xs font-mono tracking-widest">SCROLL</span>
+          <ArrowDown className="w-4 h-4" />
         </motion.div>
       </div>
     </section>

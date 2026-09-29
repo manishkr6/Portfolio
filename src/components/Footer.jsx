@@ -1,145 +1,63 @@
-import { motion } from 'framer-motion';
-import { FiHeart, FiGithub, FiLinkedin, FiTwitter, FiMail, FiInstagram } from 'react-icons/fi';
+import { GitFork, Link, Share2, Terminal } from 'lucide-react';
 import { personalData } from '../data/personalData';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  const quickLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Journey', href: '#journey' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
-  const socialLinks = [
-    { icon: FiGithub, url: personalData.github, label: 'GitHub' },
-    { icon: FiLinkedin, url: personalData.linkedin, label: 'LinkedIn' },
-    { icon: FiInstagram, url: personalData.instagram, label: 'Instagram' },
-    { icon: FiMail, url: `mailto:${personalData.email}`, label: 'Email' },
-  ];
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <footer className="relative bg-dark-400/30 backdrop-blur-sm border-t border-primary-500/20 mt-20">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+    <footer className="relative border-t border-dark-border">
+      {/* Top glow */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ai-cyan to-transparent opacity-50" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-2xl font-display font-bold text-gradient mb-4">
-              &lt;MKB /&gt;
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Full Stack Developer & AI/ML Enthusiast passionate about creating innovative solutions.
-            </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-10 h-10 rounded-full glass-effect flex items-center justify-center text-gray-400 hover:text-primary-400 hover:border-primary-400 transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon size={18} />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+          <div className="flex items-center gap-2">
+            <Terminal className="w-5 h-5 text-ai-cyan" />
+            <span className="font-mono text-lg font-semibold text-white">
+              manish<span className="text-ai-cyan">.dev</span>
+            </span>
+          </div>
 
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <h4 className="text-lg font-bold text-white mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="text-gray-400 hover:text-primary-400 transition-colors duration-300 inline-flex items-center gap-2 group"
-                  >
-                    <span className="w-0 h-0.5 bg-primary-400 group-hover:w-4 transition-all duration-300" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          {/* Quick nav */}
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+            {['about', 'skills', 'projects', 'journey', 'certificates', 'contact'].map(s => (
+              <button
+                key={s}
+                onClick={() => scrollTo(s)}
+                className="hover:text-ai-cyan transition-colors capitalize"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
 
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h4 className="text-lg font-bold text-white mb-4">Get in Touch</h4>
-            <ul className="space-y-3 text-gray-400">
-              <li>
-                <a href={`mailto:${personalData.email}`} className="hover:text-primary-400 transition-colors">
-                  {personalData.email}
-                </a>
-              </li>
-              <li>{personalData.phone}</li>
-              <li>{personalData.location}</li>
-            </ul>
-          </motion.div>
+          {/* Social */}
+          <div className="flex gap-4">
+            <a href={personalData.github} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-white transition-colors">
+              <GitFork className="w-5 h-5" />
+            </a>
+            <a href={personalData.linkedin} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-ai-cyan transition-colors">
+              <Link className="w-5 h-5" />
+            </a>
+            <a href={personalData.instagram} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-pink-400 transition-colors">
+              <Share2 className="w-5 h-5" />
+            </a>
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="pt-8 border-t border-gray-700"
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-            <p>
-              © {currentYear} {personalData.name}. All rights reserved.
-            </p>
-            <p className="flex items-center gap-2">
-              Designed & Built with{' '}
-              <FiHeart className="text-red-500 animate-pulse" size={16} />
-              by {personalData.name.split(' ')[0]}
-            </p>
-          </div>
-        </motion.div>
+        <div className="mt-8 pt-6 border-t border-dark-border text-center text-sm text-slate-600">
+          <p>
+            Built with{' '}
+            <span className="text-ai-cyan">React + Vite</span> by{' '}
+            <span className="text-white font-medium">Manish Kumar Baitha</span>
+            {' '}·{' '}
+            <span className="font-mono text-xs">© {new Date().getFullYear()}</span>
+          </p>
+        </div>
       </div>
-
-      {/* Back to Top Button */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-8 right-8 w-12 h-12 bg-primary-500 text-dark-500 rounded-full flex items-center justify-center hover:bg-primary-400 transition-all duration-300 hover-glow z-40 group"
-        aria-label="Back to top"
-      >
-        <svg
-          className="w-6 h-6 group-hover:-translate-y-1 transition-transform"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-      </motion.button>
     </footer>
   );
 };

@@ -1,152 +1,160 @@
-import { motion } from "framer-motion";
-import { FiDownload } from "react-icons/fi";
-import { SiWebassembly, SiTensorflow, SiPandas } from "react-icons/si";
-import { FaLaptopCode } from "react-icons/fa";
-import { personalData } from "../data/personalData";
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { CheckCircle2, MapPin, Mail, Briefcase } from 'lucide-react';
+import SectionHeading from './SectionHeading';
+import { personalData } from '../data/personalData';
+
+const STATS = [
+  { label: 'Projects Built', value: 7, suffix: '+' },
+  { label: 'Internship', value: 1, suffix: '' },
+  { label: 'Certifications', value: 6, suffix: '+' },
+  { label: 'GitHub Repos', value: 10, suffix: '+' },
+];
+
+const WHAT_I_BRING = [
+  'End-to-end ML pipeline development',
+  'LLM & RAG-based intelligent systems',
+  'Full-stack MERN web applications',
+  'Data analysis and visualization',
+  'Multi-agent AI architectures',
+  'Clean, production-ready code',
+];
+
+const Counter = ({ value, suffix, inView }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const duration = 1500;
+    const step = Math.ceil(value / (duration / 16));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= value) { setCount(value); clearInterval(timer); }
+      else setCount(start);
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, value]);
+
+  return <span>{count}{suffix}</span>;
+};
 
 const About = () => {
-  const skills = [
-    { name: "Web Development", icon: SiWebassembly, color: "text-blue-400" },
-    { name: "Machine Learning", icon: SiTensorflow, color: "text-purple-400" },
-    { name: "Data Analysis", icon: SiPandas, color: "text-green-400" },
-    { name: "Responsive Design", icon: FaLaptopCode, color: "text-orange-400" },
-  ];
-
-  const aboutText = {
-    intro: (
-      <>
-        Hi, I'm Manish Kumar Baitha — an <span className="bg-blue-500/10 text-blue-300 px-1.5 py-0.5 rounded">MCA student specializing in AI & Data Science</span>, with a strong focus on <span className="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded">Machine Learning and Generative AI</span>. I am passionate about moving beyond traditional data analysis to build intelligent systems and innovative, AI-driven solutions.
-      </>
-    ),
-    skills: (
-      <>
-        My core expertise is rooted in <span className="bg-blue-500/10 text-blue-300 px-1.5 py-0.5 rounded">Data Science and ML</span>, utilizing <span className="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded">Python, Scikit-learn, XGBoost</span>, and advanced classification algorithms. I am actively exploring <span className="bg-primary-500/10 text-primary-300 px-1.5 py-0.5 rounded">Generative AI</span> to create smarter, context-aware applications. To bring these models to the real world, I leverage my <span className="bg-blue-500/10 text-blue-300 px-1.5 py-0.5 rounded">Full-Stack MERN background</span>—enabling me to build and deploy end-to-end, interactive AI tools, a capability I've applied during my time at <span className="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded">SH1ELD Tech InfoSec Solutions</span>.
-      </>
-    ),
-    personal: (
-      <>
-        Beyond training models, I proudly serve as the <span className="bg-primary-500/10 text-primary-300 px-1.5 py-0.5 rounded">Innovation Coordinator for the IIC</span> (Institution's Innovation Council) at The ICFAI University, Sikkim. I love fostering a culture of tech creativity and organizing impactful academic seminars. When I step away from the screen, you'll find me hiking, brainstorming new ideas over coffee, or playing badminton. I'm driven by continuous learning and building communities around emerging tech.
-      </>
-    )
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section
-      id="about"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-dark-900 to-dark-950"
-    >
-      {/* Background glows */}
-      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
-      <div className="absolute top-16 sm:top-20 right-6 sm:right-10 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-purple-600/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-16 sm:bottom-20 left-6 sm:left-10 w-56 sm:w-72 md:w-80 h-56 sm:h-72 md:h-80 bg-blue-600/10 rounded-full blur-3xl" />
+    <section id="about" className="py-24 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="// about me"
+          title="Who Am I?"
+          subtitle="Crafting intelligent systems at the intersection of AI, data, and the web."
+        />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-col items-center md:grid md:grid-cols-[auto,1fr] md:gap-10 lg:gap-16"
-        >
-          {/* Photo + Name + Title (centered on mobile, left on desktop) */}
+        <div className="grid md:grid-cols-2 gap-12 items-center" ref={ref}>
+          {/* LEFT — Avatar card + stats */}
           <motion.div
-            variants={itemVariants}
-            className="flex flex-col items-center md:items-start mb-8 md:mb-0"
+            className="flex flex-col gap-6"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
           >
-            <div className="relative w-64 sm:w-72 md:w-80 lg:w-96 rounded-2xl overflow-hidden border-2 border-primary-500/30 shadow-2xl shadow-black/40">
-              <img
-                src={personalData.profileImage2}
-                alt="Manish Kumar Baitha"
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+            {/* Profile card */}
+            <div className="glass rounded-2xl p-6 gradient-border flex flex-col items-center gap-4">
+              <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-ai-cyan/40">
+                <img
+                  src={personalData.profileImage2 || personalData.profileImage}
+                  alt={personalData.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-white">{personalData.name}</h3>
+                <p className="text-ai-cyan text-sm font-mono mt-1">{personalData.title}</p>
+              </div>
+              <div className="flex flex-col gap-2 w-full text-sm text-slate-400">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-ai-cyan flex-shrink-0" />
+                  {personalData.location}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-ai-cyan flex-shrink-0" />
+                  {personalData.email}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-ai-purple flex-shrink-0" />
+                  Open to Internships & Jobs
+                </div>
+              </div>
             </div>
 
-            <div className="mt-5 sm:mt-6 text-center md:text-left">
-              <h3 className="text-2xl sm:text-2.5xl md:text-3xl font-bold text-white">
-                Manish Kumar Baitha
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {STATS.map(stat => (
+                <div
+                  key={stat.label}
+                  className="glass rounded-xl p-4 border border-dark-border text-center hover:border-ai-cyan/40 transition-colors"
+                >
+                  <div className="text-3xl font-bold text-ai-cyan font-mono">
+                    <Counter value={stat.value} suffix={stat.suffix} inView={inView} />
+                  </div>
+                  <div className="text-slate-400 text-sm mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* RIGHT — Bio + what I bring */}
+          <motion.div
+            className="flex flex-col gap-6"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="glass rounded-2xl p-8 border border-dark-border">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Passionate about <span className="text-ai-cyan">AI</span> & <span className="text-ai-purple">Data</span>
               </h3>
-              <p className="mt-1 sm:mt-2 w-64 sm:w-72 md:w-80 lg:w-96 text-primary-400 font-medium text-base sm:text-lg max-w-[280px] sm:max-w-none">
-                AI/ML & Data Science Enthusiast | Web Developer
+              <p className="text-slate-400 leading-relaxed mb-4">
+                I'm an MCA student specializing in AI & Data Science at ICFAI University Sikkim, 
+                with hands-on experience building real-world intelligent systems. From multi-agent 
+                LLM pipelines to full-stack MERN applications, I bridge the gap between cutting-edge 
+                AI research and practical software engineering.
+              </p>
+              <p className="text-slate-400 leading-relaxed">
+                My internship with the Government of Sikkim IT Department gave me exposure to 
+                enterprise-grade systems. I'm driven by the challenge of turning complex data into 
+                actionable insights and intelligent products that make a real difference.
               </p>
             </div>
-          </motion.div>
 
-          {/* Text Content */}
-          <motion.div
-            variants={containerVariants}
-            className="w-full space-y-5 sm:space-y-6 md:space-y-8 text-center md:text-left"
-          >
-            <motion.h2
-              variants={itemVariants}
-              className="text-3.5xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-purple-500 bg-clip-text text-transparent"
-            >
-              About Me
-            </motion.h2>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto md:mx-0 text-justify"
-            >
-              {aboutText.intro}
-            </motion.p>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto md:mx-0 text-justify"
-            >
-              {aboutText.skills}
-            </motion.p>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto md:mx-0 text-justify"
-            >
-              {aboutText.personal}
-            </motion.p>
-
-            {/* Skills */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4 pt-3 sm:pt-4"
-            >
-              {skills.map((skill, index) => {
-                const Icon = skill.icon;
-                return (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-dark-800/70 border border-dark-700 rounded-full hover:border-primary-500/60 transition-all duration-300 backdrop-blur-sm"
+            {/* What I bring */}
+            <div className="glass rounded-2xl p-6 border border-dark-border">
+              <h4 className="text-lg font-semibold text-white mb-4 font-mono">
+                <span className="text-ai-cyan">&gt;</span> What I Bring
+              </h4>
+              <div className="grid grid-cols-1 gap-3">
+                {WHAT_I_BRING.map((item, i) => (
+                  <motion.div
+                    key={item}
+                    className="flex items-center gap-3 text-slate-300 text-sm"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
                   >
-                    <Icon className={`text-lg sm:text-xl ${skill.color}`} />
-                    <span className="text-gray-200 font-medium text-sm sm:text-base">
-                      {skill.name}
-                    </span>
-                  </div>
-                );
-              })}
-            </motion.div>
-
-            {/* Download CV Button */}
-
+                    <CheckCircle2 className="w-4 h-4 text-ai-cyan flex-shrink-0" />
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
