@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { Brain, Code2, ArrowRight } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import GlowCard from './GlowCard';
-import { projectsData } from '../data/projectsData';
+import { aimlProjectsData } from '../data/aimlProjectsData';
+import { webProjectsData } from '../data/webProjectsData';
 
 const AI_TECHS = ['Python', 'TensorFlow', 'LangChain', 'Mistral AI', 'ChromaDB', 'Streamlit'];
 const WEB_TECHS = ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind', 'Clerk Auth'];
@@ -19,8 +20,18 @@ const TechBadge = ({ name, color }) => (
 
 const Projects = () => {
   const navigate = useNavigate();
-  const aiCount = projectsData.aiMl?.length ?? 0;
-  const webCount = projectsData.webDev?.length ?? 0;
+  const aiCount = aimlProjectsData?.length ?? 0;
+  const webCount = webProjectsData?.length ?? 0;
+
+  const handleNavigateAI = () => {
+    window.history.replaceState(null, '', '#projects');
+    navigate('/projects/ai');
+  };
+
+  const handleNavigateWeb = () => {
+    window.history.replaceState(null, '', '#projects');
+    navigate('/projects/web');
+  };
 
   return (
     <section id="projects" className="py-24 relative">
@@ -38,7 +49,7 @@ const Projects = () => {
           {/* AI/ML Card */}
           <GlowCard
             glowColor="cyan"
-            onClick={() => navigate('/projects/ai')}
+            onClick={handleNavigateAI}
             className="gradient-border rounded-2xl glass p-8 flex flex-col gap-6 group"
           >
             {/* Header */}
@@ -86,7 +97,7 @@ const Projects = () => {
           {/* Web Dev Card */}
           <GlowCard
             glowColor="emerald"
-            onClick={() => navigate('/projects/web')}
+            onClick={handleNavigateWeb}
             className="gradient-border-emerald rounded-2xl glass p-8 flex flex-col gap-6 group"
           >
             {/* Header */}

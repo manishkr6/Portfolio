@@ -23,7 +23,7 @@ const Footer = () => {
 
           {/* Quick nav */}
           <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
-            {['about', 'skills', 'projects', 'journey', 'certificates', 'contact'].map(s => (
+            {['about', 'journey', 'skills', 'projects', 'certificates', 'contact'].map(s => (
               <button
                 key={s}
                 onClick={() => scrollTo(s)}

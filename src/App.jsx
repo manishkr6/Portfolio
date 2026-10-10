@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
+import ScrollManager from './components/ScrollManager';
 
 const Home = lazy(() => import('./pages/Home'));
 const AIProjectsPage = lazy(() => import('./pages/AIProjectsPage'));
@@ -55,6 +56,7 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollManager />
       <div className="min-h-screen bg-dark-base">
         <Navbar />
         <AnimatedRoutes />

@@ -1,22 +1,32 @@
 export const journeyData = [
   {
     id: 1,
+    type: "work",
+    title: "InfoSec Solutions Developer",
+    organization: "SH1ELD Tech InfoSec Solutions",
+    duration: "January 2026 - Present",
+    description: "Developing security solutions and implementing best practices for information security in web applications.",
+    status: "Ongoing",
+    icon: "work",
+    details: [
+      "Developing security-focused web applications",
+      "Implementing authentication and authorization systems",
+      "Working with security protocols and best practices"
+    ],
+    technologies: [
+      { name: "React", color: "cyan" },
+      { name: "Security", color: "red" },
+      { name: "Web Development", color: "purple" }
+    ]
+  },
+  {
+    id: 2,
     type: "education",
     title: "Master of Computer Applications (MCA)",
     organization: "Specialization in AI and Data Science",
     duration: "2025 - 2027",
     description: "Pursuing advanced studies in Artificial Intelligence and Data Science, focusing on machine learning algorithms, deep learning, and big data analytics.",
     status: "Ongoing",
-    icon: "education"
-  },
-  {
-    id: 2,
-    type: "education",
-    title: "Bachelor of Computer Applications (BCA)",
-    organization: "University",
-    duration: "2022 - 2025",
-    description: "Completed undergraduate degree with a strong foundation in computer science fundamentals, programming, and software development.",
-    status: "completed",
     icon: "education"
   },
   {
@@ -43,22 +53,12 @@ export const journeyData = [
   },
   {
     id: 4,
-    type: "work",
-    title: "InfoSec Solutions Developer",
-    organization: "SH1ELD Tech InfoSec Solutions",
-    duration: "January 2026 - Present",
-    description: "Developing security solutions and implementing best practices for information security in web applications.",
-    status: "Ongoing",
-    icon: "work",
-    details: [
-      "Developing security-focused web applications",
-      "Implementing authentication and authorization systems",
-      "Working with security protocols and best practices"
-    ],
-    technologies: [
-      { name: "React", color: "cyan" },
-      { name: "Security", color: "red" },
-      { name: "Web Development", color: "purple" }
-    ]
+    type: "education",
+    title: "Bachelor of Computer Applications (BCA)",
+    organization: "University",
+    duration: "2022 - 2025",
+    description: "Completed undergraduate degree with a strong foundation in computer science fundamentals, programming, and software development.",
+    status: "completed",
+    icon: "education"
   }
 ];

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Terminal } from 'lucide-react';
 import { personalData } from '../data/personalData';
@@ -7,9 +7,9 @@ import { personalData } from '../data/personalData';
 const NAV_LINKS = [
   { label: 'Home', href: '/#home' },
   { label: 'About', href: '/#about' },
+  { label: 'Journey', href: '/#journey' },
   { label: 'Skills', href: '/#skills' },
   { label: 'Projects', href: '/#projects' },
-  { label: 'Journey', href: '/#journey' },
   { label: 'Certificates', href: '/#certificates' },
   { label: 'Contact', href: '/#contact' },
 ];
@@ -18,13 +18,14 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
       // Track active section
-      const sections = ['home','about','skills','projects','journey','certificates','contact'];
+      const sections = ['home', 'about', 'journey', 'skills', 'projects', 'certificates', 'contact'];
       for (const s of sections.reverse()) {
         const el = document.getElementById(s);
         if (el && window.scrollY >= el.offsetTop - 100) {
@@ -42,9 +43,13 @@ const Navbar = () => {
     if (href.startsWith('/#')) {
       const id = href.replace('/#', '');
       if (pathname !== '/') {
-        window.location.href = href;
+        navigate(href, { state: { scrollTo: id } });
       } else {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          window.history.replaceState(null, '', '#' + id);
+        }
       }
     }
   };

@@ -1,14 +1,15 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, GitFork, ExternalLink, CheckCircle2, Cpu } from 'lucide-react';
-import { projectsData } from '../data/projectsData';
+import { aimlProjectsData } from '../data/aimlProjectsData';
+import { webProjectsData } from '../data/webProjectsData';
 import ProjectCard from '../components/ProjectCard';
 
 const ProjectDetail = ({ type = 'ai' }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const allProjects = type === 'ai' ? projectsData.aiMl : projectsData.webDev;
+  const allProjects = type === 'ai' ? aimlProjectsData : webProjectsData;
   const project = allProjects?.find(p => String(p.id) === String(id));
   const accentColor = type === 'ai' ? '#06b6d4' : '#10b981';
   const backPath = type === 'ai' ? '/projects/ai' : '/projects/web';

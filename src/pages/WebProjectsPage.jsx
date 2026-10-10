@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Code2, Filter } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
-import { projectsData } from '../data/projectsData';
+import { webProjectsData } from '../data/webProjectsData';
 
 const CATEGORIES = ['All', 'Full Stack', 'Frontend', 'API Integration'];
 
@@ -11,7 +11,7 @@ const WebProjectsPage = () => {
   const navigate = useNavigate();
   const [filter, setFilter] = useState('All');
 
-  const projects = projectsData.webDev || [];
+  const projects = webProjectsData || [];
   const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
   return (
@@ -21,7 +21,7 @@ const WebProjectsPage = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-ai-emerald/10 via-transparent to-ai-cyan/10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/#projects', { state: { scrollTo: 'projects' } })}
             className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
