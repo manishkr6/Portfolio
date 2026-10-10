@@ -26,10 +26,10 @@ const SkillBadge = ({ skill, index }) => {
       }}
     >
       <div
-        className="text-2xl"
-        style={{ filter: `drop-shadow(0 0 6px ${skill.color})` }}
+        className="text-3xl mb-1"
+        style={{ filter: `drop-shadow(0 0 6px ${skill.color})`, color: skill.color }}
       >
-        {skill.icon}
+        <skill.icon />
       </div>
       <span
         className="text-xs font-medium text-center text-slate-300 group-hover:text-white transition-colors"

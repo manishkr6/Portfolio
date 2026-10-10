@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -53,14 +53,30 @@ const AnimatedRoutes = () => {
   );
 };
 
+import InitialLoader from './components/InitialLoader';
+
 function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
     <BrowserRouter>
       <ScrollManager />
-      <div className="min-h-screen bg-dark-base">
-        <Navbar />
-        <AnimatedRoutes />
-      </div>
+      <AnimatePresence mode="wait">
+        {loading ? (
+          <InitialLoader key="initial-loader" onComplete={() => setLoading(false)} />
+        ) : (
+          <motion.div
+            key="app-content"
+            className="min-h-screen bg-dark-base"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Navbar />
+            <AnimatedRoutes />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </BrowserRouter>
   );
 }
